@@ -1,10 +1,11 @@
 #!/bin/sh
 set -e
 
-# Sync seed images into the media volume (cp -n = never overwrite existing files)
-echo "Syncing seed media to volume..."
+# Copy seed images into the media volume
+echo "Copying seed media to volume..."
 mkdir -p /app/media/safestep
-cp -rn /app/seed-media/safestep/. /app/media/safestep/
+cp -r /app/seed-media/safestep/. /app/media/safestep/
+echo "Media copy done: $(ls /app/media/safestep/ | wc -l) files"
 
 echo "Waiting for database..."
 until PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" -c '\q' 2>/dev/null; do
