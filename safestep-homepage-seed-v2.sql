@@ -27,7 +27,7 @@ VALUES (
       {"id":"a-3","content":"¿Necesitas cotización empresarial? ¡Escríbenos hoy!","link":{"url":"/contact","label":"Cotizar","newTab":false}}
     ]
   }'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -52,7 +52,7 @@ VALUES (
       {"id":"m-4","title":"Contacto","url":"/","items":[]}
     ]
   }'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -72,7 +72,7 @@ VALUES (
       {"id":"fc-3","title":"Soporte","links":[{"id":"fl-3-1","label":"Cotización Empresarial","url":"/"},{"id":"fl-3-2","label":"Seguimiento de Pedido","url":"/customer/order"},{"id":"fl-3-3","label":"Contacto","url":"/"}]}
     ]
   }'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -96,7 +96,7 @@ VALUES (
       {"id":"slide-3","image":"/media/safestep/suela.png","width":500,"height":600,"eyebrow":"TECNOLOGÍA DE VANGUARDIA","headline":"Suela que Agarra en Cualquier Superficie","subText":"Diseño ergonómico y materiales de alta resistencia para el trabajador que no se detiene.","buttonText":"Conocer Más","buttonLink":"/catalog","buttonStyle":"default","contentPosition":"ml","overlayTint":"gradient","overlayOpacity":0.6,"wholeSlideLink":false,"hidden":false}
     ]
   }'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -118,7 +118,7 @@ VALUES (
     ],
     "columns": 4, "showIcons": false, "iconSize": "lg", "alignment": "center", "divider": true
   }'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -139,7 +139,7 @@ VALUES (
     "contentPosition": "mc", "overlayTint": "none", "overlayOpacity": 0,
     "cta": null, "cta2": null, "mobileImage": null
   }'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -153,7 +153,7 @@ VALUES (
   'SafeStep - Separador 1',
   'separator',
   '{"size":"md","showLine":true,"lineColor":"#e1e3e5"}'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -172,7 +172,7 @@ VALUES (
     "subText": "Calzado industrial certificado para cada industria y condición de trabajo.",
     "viewAllLink": "/catalog", "viewAllLabel": "Ver Catálogo Completo"
   }'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -186,7 +186,7 @@ VALUES (
   'SafeStep - Separador 2',
   'separator',
   '{"size":"lg","showLine":false}'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -208,7 +208,7 @@ VALUES (
     "cta": {"label":"Ver Todos los Modelos","url":"/catalog","kind":"custom","newTab":false,"style":"primary"},
     "verticalAlign": "center", "imageFit": "cover"
   }'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -231,7 +231,7 @@ VALUES (
     ],
     "gap": "md", "minHeight": 420
   }'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -245,7 +245,7 @@ VALUES (
   'SafeStep - Separador 3',
   'separator',
   '{"size":"lg","showLine":false}'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -270,7 +270,7 @@ VALUES (
     "pullQuote": "La seguridad no es un lujo, es un derecho de todo trabajador.",
     "imageSize": 50
   }'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -284,7 +284,7 @@ VALUES (
   'SafeStep - Separador 4',
   'separator',
   '{"size":"md","showLine":true,"lineColor":"#e1e3e5"}'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
@@ -314,7 +314,7 @@ VALUES (
     "maxWidth": "normal",
     "allowMultipleOpen": false
   }'::jsonb,
-  1
+  true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
