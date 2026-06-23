@@ -4,7 +4,7 @@ services:
   app:
     image: evershop/evershop:latest
     restart: always
-    command: sh -c "npx evershop build && npx evershop start"
+    command: sh -c "npm run build && npm run start"
     environment:
       DB_HOST: database
       DB_PORT: 5432
@@ -15,7 +15,6 @@ services:
       - ./config.json:/app/config/default.json
       - ./seed/images/safestep:/app/media/safestep
       - media-data:/app/media
-      - evershop-build:/app/.evershop
     depends_on:
       database:
         condition: service_healthy
@@ -40,4 +39,3 @@ services:
 volumes:
   postgres-data:
   media-data:
-  evershop-build:
