@@ -52,7 +52,7 @@ export default function Logo({
 }
 
 export const layout = {
-  areaId: 'headerMiddleCenter',
+  areaId: 'headerMiddleLeft',
   sortOrder: 10
 };
 

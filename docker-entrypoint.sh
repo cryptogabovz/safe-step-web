@@ -26,6 +26,8 @@ done
 # Seed SafeStep widgets (SQL is idempotent — deletes own rows before inserting)
 echo "Seeding homepage widgets..."
 PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" < /app/safestep-homepage-seed-v2.sql
+echo "Seeding legal pages..."
+PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" < /app/safestep-legal-pages.sql
 echo "Seed complete."
 
 wait $APP_PID

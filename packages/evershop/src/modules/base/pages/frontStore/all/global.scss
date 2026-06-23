@@ -171,6 +171,13 @@
     }
   }
 
+  /* Phone: stored in CSS content only — invisible to HTML scrapers.
+     To update: replace the \XX sequences with new Unicode code points.
+     Current value decodes to: +1 (000) 000-0000  (placeholder — update before launch) */
+  .ss-tel::before {
+    content: "\2B\31\20\28\30\30\30\29\20\30\30\30\2D\30\30\30\30";
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;

@@ -10,22 +10,22 @@ export function Header() {
         isGlobal
         editableInPageBuilder
       />
-      <div className="header__middle grid grid-cols-3 px-6 py-3">
+      <div className="header__middle flex items-center gap-6 px-6 py-3">
         <Area
           id="headerMiddleLeft"
-          className="header__middle__left flex justify-start items-center"
+          className="header__middle__left flex-shrink-0 flex items-center"
           isGlobal
           editableInPageBuilder
         />
         <Area
           id="headerMiddleCenter"
-          className="header__middle__center flex justify-center items-center"
+          className="header__middle__center flex-1 flex items-center"
           isGlobal
           editableInPageBuilder
         />
         <Area
           id="headerMiddleRight"
-          className="header__middle__right flex justify-end items-center gap-3"
+          className="header__middle__right flex items-center gap-3 ml-auto"
           isGlobal
           editableInPageBuilder
         />

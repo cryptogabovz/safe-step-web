@@ -64,7 +64,7 @@ VALUES (
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
-VALUES (wid, 'all', 'headerBottom', 10);
+VALUES (wid, 'all', 'headerMiddleCenter', 10);
 
 -- ============================================================
 -- 3. Footer Menu — footer (route: all)
@@ -77,14 +77,15 @@ VALUES (
     "columns": [
       {"id":"fc-1","title":"Productos","links":[{"id":"fl-1-1","label":"Botas Punta de Acero","url":"/catalog"},{"id":"fl-1-2","label":"Ver Catálogo","url":"/catalog"}]},
       {"id":"fc-2","title":"Empresa","links":[{"id":"fl-2-1","label":"Nosotros","url":"/"},{"id":"fl-2-2","label":"Certificaciones","url":"/"}]},
-      {"id":"fc-3","title":"Soporte","links":[{"id":"fl-3-1","label":"Cotización Empresarial","url":"/"},{"id":"fl-3-2","label":"Seguimiento de Pedido","url":"/customer/order"},{"id":"fl-3-3","label":"Contacto","url":"/"}]}
+      {"id":"fc-3","title":"Soporte","links":[{"id":"fl-3-1","label":"Cotización Empresarial","url":"/"},{"id":"fl-3-2","label":"Seguimiento de Pedido","url":"/customer/order"},{"id":"fl-3-3","label":"Contacto","url":"/"}]},
+      {"id":"fc-4","title":"Legal","links":[{"id":"fl-4-1","label":"Términos y Condiciones","url":"/page/terminos-y-condiciones"},{"id":"fl-4-2","label":"Política de Privacidad","url":"/page/politica-de-privacidad"}]}
     ]
   }'::jsonb,
   true
 ) RETURNING widget_instance_id INTO wid;
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
-VALUES (wid, 'all', 'footer', 10);
+VALUES (wid, 'all', 'footerTop', 10);
 
 -- ============================================================
 -- 4. Hero Slideshow — content (route: homepage)
@@ -327,6 +328,60 @@ VALUES (
 
 INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
 VALUES (wid, 'homepage', 'content', 120);
+
+-- ============================================================
+-- 16. Footer Contact Info — footerMiddleLeft (route: all)
+-- Teléfono protegido contra scraping con truco RTL/CSS
+-- ============================================================
+INSERT INTO widget_instance (name, type, settings, status)
+VALUES (
+  'SafeStep - Contacto Footer',
+  'text_block',
+  '{
+    "className": "safestep-footer-contact px-6 py-4 text-sm text-foreground/80",
+    "text": [
+      {
+        "id": "fc-brand",
+        "type": "paragraph",
+        "data": {
+          "text": "<strong>SafeStep Corp</strong>"
+        }
+      },
+      {
+        "id": "fc-addr",
+        "type": "paragraph",
+        "data": {
+          "text": "8603 NW 54th Street"
+        }
+      },
+      {
+        "id": "fc-city",
+        "type": "paragraph",
+        "data": {
+          "text": "Doral, FL 33166 — USA"
+        }
+      },
+      {
+        "id": "fc-phone",
+        "type": "paragraph",
+        "data": {
+          "text": "<span class=\"ss-tel\" aria-label=\"Teléfono de contacto\"></span>"
+        }
+      },
+      {
+        "id": "fc-email",
+        "type": "paragraph",
+        "data": {
+          "text": "contacto&#64;safestep&#46;com"
+        }
+      }
+    ]
+  }'::jsonb,
+  true
+) RETURNING widget_instance_id INTO wid;
+
+INSERT INTO widget_placement (widget_instance_id, route, area, sort_order)
+VALUES (wid, 'all', 'footerMiddleLeft', 10);
 
 END $$;
 

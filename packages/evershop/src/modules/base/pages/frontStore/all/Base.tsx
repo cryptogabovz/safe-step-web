@@ -48,7 +48,7 @@ export default function Base({
         <Header />
         <Area
           id="content"
-          className="content page-width"
+          className="content w-full"
           isGlobal
           wrapper="main"
           editableInPageBuilder
