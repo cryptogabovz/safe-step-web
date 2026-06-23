@@ -4,10 +4,8 @@ RUN npm install -g npm@9
 COPY package*.json .
 COPY packages ./packages
 COPY translations ./translations
-COPY media ./media
-# Create required empty dirs that may not exist in repo
-RUN mkdir -p themes extensions public config
 COPY config.json ./config/default.json
+RUN mkdir -p themes extensions public media
 RUN npm install
 RUN npm run build
 
