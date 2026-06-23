@@ -338,8 +338,8 @@ VALUES (
   'SafeStep - Contacto Footer',
   'text_block',
   jsonb_build_object(
-    'className', 'safestep-footer-contact px-6 py-4 text-sm text-foreground/80',
-    'text', '[{"id":"fc-brand","type":"paragraph","data":{"text":"<strong>SafeStep Corp<\/strong>"}},{"id":"fc-addr","type":"paragraph","data":{"text":"8603 NW 54th Street"}},{"id":"fc-city","type":"paragraph","data":{"text":"Doral, FL 33166 — USA"}},{"id":"fc-phone","type":"paragraph","data":{"text":"<span class=\"ss-tel\" aria-label=\"Teléfono de contacto\"><\/span>"}},{"id":"fc-email","type":"paragraph","data":{"text":"contacto@safestep.com"}}]'
+    'className', 'safestep-footer-contact px-6 py-4 text-sm',
+    'text', '[{"size":12,"columns":[{"size":12,"data":{"blocks":[{"type":"paragraph","data":{"text":"<strong>SafeStep Corp<\/strong>"}},{"type":"paragraph","data":{"text":"8603 NW 54th Street"}},{"type":"paragraph","data":{"text":"Doral, FL 33166 — USA"}},{"type":"paragraph","data":{"text":"<span class=\"ss-tel\"><\/span>"}},{"type":"paragraph","data":{"text":"contacto@safestep.com"}}]}}]}]'
   ),
   true
 ) RETURNING widget_instance_id INTO wid;
