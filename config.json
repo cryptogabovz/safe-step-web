@@ -1,0 +1,29 @@
+{
+  "shop": {
+    "language": "en",
+    "timezone": "America/New_York",
+    "currency": "USD",
+    "weightUnit": "kg",
+    "homeUrl": "http://localhost:3000"
+  },
+  "system": {
+    "file_storage": "local",
+    "session": {
+      "maxAge": 86400000,
+      "resave": false,
+      "saveUninitialized": false,
+      "cookieSecret": "safestep-secret-2025",
+      "cookieName": "sid",
+      "adminCookieName": "admin-sid"
+    }
+  },
+  "themeConfig": {
+    "logo": {
+      "alt": "Safe Step",
+      "src": "/assets/safestep/logo-safestep.png",
+      "width": 180,
+      "height": 70
+    },
+    "copyRight": "© 2025 Safe Step. Todos los derechos reservados."
+  }
+}

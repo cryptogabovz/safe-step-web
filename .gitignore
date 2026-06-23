@@ -1,0 +1,73 @@
+# Dependencies
+node_modules
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Build output
+dist
+!packages/create-evershop-app/sample/extensions/sample/dist
+!packages/create-evershop-app/sample/themes/sample/dist
+
+# Extensions (local only)
+/extensions/*
+!extensions/agegate
+!extensions/azure_file_storage
+!extensions/google_login
+!extensions/s3_file_storage
+!extensions/resend
+!extensions/sendgrid
+!extensions/product_review
+extensions
+
+# Themes
+/themes
+
+# IDE & editors
+.idea/*
+.vscode
+*.swp
+*.swo
+*~
+
+# Evershop local state
+.evershop
+
+# Logs
+npm-debug.log
+*.log
+yarn-error.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Runtime / generated
+/media
+/public
+coverage
+cypress
+.turbo
+
+# Playwright artefacts
+test-results
+playwright-report
+playwright/.cache
+/blob-report
+
+# Config (local overrides)
+/config
+/packages/evershop/config
+
+# Misc
+/package-log.json
+mysqlToPostgres.js
+/docs
+/specifications
+/wiki
+/design-kit
+/CLAUDE.md
+.prettierignore
+.prettierrc
