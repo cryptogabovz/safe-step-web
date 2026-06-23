@@ -8,6 +8,7 @@ COPY translations ./translations
 COPY config.json ./config/default.json
 COPY safestep-homepage-seed-v2.sql .
 COPY safestep-legal-pages.sql .
+COPY safestep-about-contact.sql .
 COPY seed/images/safestep ./seed-media/safestep
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
