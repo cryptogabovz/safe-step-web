@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: evershop/evershop:latest
+    build: .
     restart: always
     environment:
       DB_HOST: database
@@ -11,8 +11,6 @@ services:
       DB_USER: ${DB_USER:-postgres}
       DB_NAME: ${DB_NAME:-postgres}
     volumes:
-      - ./config.json:/app/config/default.json
-      - ./.evershop:/app/.evershop
       - ./seed/images/safestep:/app/media/safestep
       - media-data:/app/media
     depends_on:
