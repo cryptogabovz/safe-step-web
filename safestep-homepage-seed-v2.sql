@@ -338,8 +338,8 @@ VALUES (
   'SafeStep - Contacto Footer',
   'text_block',
   jsonb_build_object(
-    'className', 'safestep-footer-contact px-6 py-4 text-sm',
-    'text', '[{"size":12,"columns":[{"size":12,"data":{"blocks":[{"type":"paragraph","data":{"text":"<strong>SafeStep Corp<\/strong>"}},{"type":"paragraph","data":{"text":"8603 NW 54th Street"}},{"type":"paragraph","data":{"text":"Doral, FL 33166 — USA"}},{"type":"paragraph","data":{"text":"<span class=\"ss-tel\"><\/span>"}},{"type":"paragraph","data":{"text":"contacto@safestep.com"}}]}}]}]'
+    'className', 'safestep-footer-contact',
+    'text', '[{"size":12,"columns":[{"size":12,"data":{"blocks":[{"type":"raw","data":{"html":"<p style=\"margin:0 0 2px;font-size:0.8rem;line-height:1.5;color:#9ca3af\"><strong style=\"color:#d1d5db\">SafeStep Corp<\/strong><br>8603 NW 54th Street, Doral FL 33166<br>contacto@safestep.com<\/p>"}}]}}]}]'
   ),
   true
 ) RETURNING widget_instance_id INTO wid;

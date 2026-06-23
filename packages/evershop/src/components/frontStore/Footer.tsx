@@ -10,6 +10,18 @@ export function Footer({ copyRight }: FooterProps) {
   return (
     <footer className="footer bg-gray-900 text-gray-300 mt-16 pt-10 pb-4 border-t border-gray-700">
       <div className="footer__top__wrapper max-w-7xl mx-auto px-6 md:px-10">
+        {/* White logo at top of footer */}
+        <div className="mb-8">
+          <a href="/">
+            <img
+              src="/images?src=%2Fmedia%2Fsafestep%2Flogo-blanco.png&w=160&q=90"
+              alt="Safe Step"
+              width={160}
+              height={62}
+              style={{ height: 'auto', maxHeight: '52px' }}
+            />
+          </a>
+        </div>
         <Area
           id="footerTop"
           className="footer__top"
@@ -17,10 +29,10 @@ export function Footer({ copyRight }: FooterProps) {
           editableInPageBuilder
         />
       </div>
-      <div className="footer__middle__wrapper max-w-7xl mx-auto px-6 md:px-10 mt-8 pt-8 border-t border-gray-700 flex flex-wrap gap-8 justify-between items-start">
+      <div className="footer__middle__wrapper max-w-7xl mx-auto px-6 md:px-10 mt-6 pt-6 border-t border-gray-700 flex flex-wrap gap-8 justify-between items-start">
         <Area
           id="footerMiddleLeft"
-          className="footer__middle__left text-sm"
+          className="footer__middle__left text-xs text-gray-400 leading-relaxed"
           isGlobal
           editableInPageBuilder
         />

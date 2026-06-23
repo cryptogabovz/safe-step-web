@@ -12,14 +12,20 @@ interface LogoProps {
 }
 export default function Logo({
   themeConfig: {
-    logo: { src, alt = 'Evershop', width = 128, height = 128 }
+    logo: { src, alt = 'Evershop', width = 180, height = 70 }
   }
 }: LogoProps) {
   return (
     <div className="logo md:ml-0 flex justify-center items-center">
       {src && (
         <a href="/" className="logo-icon">
-          <img src={src} alt={alt} width={width} height={height} />
+          <img
+            src={`/images?src=${encodeURIComponent(src)}&w=${width}&q=90`}
+            alt={alt}
+            width={width}
+            height={height}
+            style={{ height: 'auto', maxHeight: `${height}px` }}
+          />
         </a>
       )}
       {!src && (
