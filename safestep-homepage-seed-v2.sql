@@ -4,6 +4,14 @@
 -- ============================================================
 BEGIN;
 
+-- Limpia seeds previos para permitir reimport idempotente
+DELETE FROM widget_placement
+WHERE widget_instance_id IN (
+  SELECT widget_instance_id FROM widget_instance
+  WHERE name LIKE 'SafeStep -%'
+);
+DELETE FROM widget_instance WHERE name LIKE 'SafeStep -%';
+
 DO $$
 DECLARE
   wid INT;
@@ -43,13 +51,13 @@ VALUES (
   '{
     "isMain": true,
     "menus": [
-      {"id":"m-1","title":"Inicio","url":"/","items":[]},
-      {"id":"m-2","title":"Productos","url":"/catalog","items":[
-        {"id":"m-2-1","title":"Botas Punta de Acero","url":"/catalog"},
-        {"id":"m-2-2","title":"Ver Todo","url":"/catalog"}
+      {"id":"m-1","name":"Inicio","url":"/","type":"custom","children":[]},
+      {"id":"m-2","name":"Productos","url":"/catalog","type":"custom","children":[
+        {"id":"m-2-1","name":"Botas Punta de Acero","url":"/catalog","type":"custom"},
+        {"id":"m-2-2","name":"Ver Todo","url":"/catalog","type":"custom"}
       ]},
-      {"id":"m-3","title":"Nosotros","url":"/","items":[]},
-      {"id":"m-4","title":"Contacto","url":"/","items":[]}
+      {"id":"m-3","name":"Nosotros","url":"/","type":"custom","children":[]},
+      {"id":"m-4","name":"Contacto","url":"/","type":"custom","children":[]}
     ]
   }'::jsonb,
   true

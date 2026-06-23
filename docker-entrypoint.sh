@@ -23,15 +23,9 @@ while [ $RETRIES -gt 0 ]; do
   RETRIES=$((RETRIES - 1))
 done
 
-# Seed only if no widgets exist
-COUNT=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" -t -c "SELECT COUNT(*) FROM widget_instance" 2>/dev/null | tr -d ' \n' || echo "0")
-
-if [ "$COUNT" = "0" ] || [ -z "$COUNT" ]; then
-  echo "Seeding homepage widgets..."
-  PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" < /app/safestep-homepage-seed-v2.sql
-  echo "Seed complete."
-else
-  echo "Already seeded ($COUNT widgets). Skipping."
-fi
+# Seed SafeStep widgets (SQL is idempotent — deletes own rows before inserting)
+echo "Seeding homepage widgets..."
+PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" < /app/safestep-homepage-seed-v2.sql
+echo "Seed complete."
 
 wait $APP_PID
