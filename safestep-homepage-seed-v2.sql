@@ -337,46 +337,10 @@ INSERT INTO widget_instance (name, type, settings, status)
 VALUES (
   'SafeStep - Contacto Footer',
   'text_block',
-  '{
-    "className": "safestep-footer-contact px-6 py-4 text-sm text-foreground/80",
-    "text": [
-      {
-        "id": "fc-brand",
-        "type": "paragraph",
-        "data": {
-          "text": "<strong>SafeStep Corp</strong>"
-        }
-      },
-      {
-        "id": "fc-addr",
-        "type": "paragraph",
-        "data": {
-          "text": "8603 NW 54th Street"
-        }
-      },
-      {
-        "id": "fc-city",
-        "type": "paragraph",
-        "data": {
-          "text": "Doral, FL 33166 — USA"
-        }
-      },
-      {
-        "id": "fc-phone",
-        "type": "paragraph",
-        "data": {
-          "text": "<span class=\"ss-tel\" aria-label=\"Teléfono de contacto\"></span>"
-        }
-      },
-      {
-        "id": "fc-email",
-        "type": "paragraph",
-        "data": {
-          "text": "contacto&#64;safestep&#46;com"
-        }
-      }
-    ]
-  }'::jsonb,
+  jsonb_build_object(
+    'className', 'safestep-footer-contact px-6 py-4 text-sm text-foreground/80',
+    'text', '[{"id":"fc-brand","type":"paragraph","data":{"text":"<strong>SafeStep Corp<\/strong>"}},{"id":"fc-addr","type":"paragraph","data":{"text":"8603 NW 54th Street"}},{"id":"fc-city","type":"paragraph","data":{"text":"Doral, FL 33166 — USA"}},{"id":"fc-phone","type":"paragraph","data":{"text":"<span class=\"ss-tel\" aria-label=\"Teléfono de contacto\"><\/span>"}},{"id":"fc-email","type":"paragraph","data":{"text":"contacto@safestep.com"}}]'
+  ),
   true
 ) RETURNING widget_instance_id INTO wid;
 
