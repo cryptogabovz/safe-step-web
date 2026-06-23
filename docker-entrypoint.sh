@@ -1,0 +1,37 @@
+#!/bin/sh
+set -e
+
+echo "Waiting for database..."
+until PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" -c '\q' 2>/dev/null; do
+  sleep 2
+done
+echo "Database ready."
+
+# Start app in background so migrations run and create tables
+npm run start &
+APP_PID=$!
+
+# Wait for widget_instance table to exist (created by migrations)
+echo "Waiting for EverShop migrations..."
+RETRIES=60
+while [ $RETRIES -gt 0 ]; do
+  TABLE=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" -t -c "SELECT to_regclass('public.widget_instance')" 2>/dev/null | tr -d ' \n' || echo "")
+  if [ "$TABLE" = "widget_instance" ]; then
+    break
+  fi
+  sleep 5
+  RETRIES=$((RETRIES - 1))
+done
+
+# Seed only if no widgets exist
+COUNT=$(PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" -t -c "SELECT COUNT(*) FROM widget_instance" 2>/dev/null | tr -d ' \n' || echo "0")
+
+if [ "$COUNT" = "0" ] || [ -z "$COUNT" ]; then
+  echo "Seeding homepage widgets..."
+  PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" < /app/safestep-homepage-seed-v2.sql
+  echo "Seed complete."
+else
+  echo "Already seeded ($COUNT widgets). Skipping."
+fi
+
+wait $APP_PID
