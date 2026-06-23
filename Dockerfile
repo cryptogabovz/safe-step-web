@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:20-alpine
 WORKDIR /app
 RUN apk add --no-cache postgresql-client
 RUN npm install -g npm@9
@@ -8,7 +8,7 @@ COPY translations ./translations
 COPY config.json ./config/default.json
 COPY safestep-homepage-seed-v2.sql .
 COPY safestep-legal-pages.sql .
-COPY seed/images/safestep ./media/safestep
+COPY seed/images/safestep ./seed-media/safestep
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 RUN mkdir -p themes extensions public media

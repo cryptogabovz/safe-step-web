@@ -8,17 +8,19 @@ interface FooterProps {
 
 export function Footer({ copyRight }: FooterProps) {
   return (
-    <footer className="footer bg-gray-100 mt-24 pt-2.5 pb-2.5 border-t border-gray-300">
-      <Area
-        id="footerTop"
-        className="footer__top"
-        isGlobal
-        editableInPageBuilder
-      />
-      <div className="footer__middle flex justify-between items-center">
+    <footer className="footer bg-gray-900 text-gray-300 mt-16 pt-10 pb-4 border-t border-gray-700">
+      <div className="footer__top__wrapper max-w-7xl mx-auto px-6 md:px-10">
+        <Area
+          id="footerTop"
+          className="footer__top"
+          isGlobal
+          editableInPageBuilder
+        />
+      </div>
+      <div className="footer__middle__wrapper max-w-7xl mx-auto px-6 md:px-10 mt-8 pt-8 border-t border-gray-700 flex flex-wrap gap-8 justify-between items-start">
         <Area
           id="footerMiddleLeft"
-          className="footer__middle__left"
+          className="footer__middle__left text-sm"
           isGlobal
           editableInPageBuilder
         />
@@ -37,14 +39,14 @@ export function Footer({ copyRight }: FooterProps) {
       </div>
       <Area
         id="footerBottom"
-        className="footer__bottom"
+        className="footer__bottom mt-8 pt-4 border-t border-gray-700"
         isGlobal
         editableInPageBuilder
         coreComponents={[
           {
             component: {
               default: (
-                <div className="page-width grid grid-cols-1 md:grid-cols-2 gap-5 justify-between">
+                <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-5 justify-between">
                   <div>
                     <div className="card-icons flex justify-center space-x-2 md:justify-start">
                       <div>
@@ -131,7 +133,7 @@ export function Footer({ copyRight }: FooterProps) {
                     </div>
                   </div>
                   <div className="self-center">
-                    <div className="copyright text-center md:text-right text-textSubdued">
+                    <div className="copyright text-center md:text-right text-gray-400 text-sm">
                       <span>{copyRight}</span>
                     </div>
                   </div>

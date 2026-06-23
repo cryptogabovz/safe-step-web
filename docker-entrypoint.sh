@@ -1,6 +1,12 @@
 #!/bin/sh
 set -e
 
+# Copy seed images into the media volume (only if not already there)
+if [ ! -d "/app/media/safestep" ]; then
+  echo "Copying seed media to volume..."
+  cp -r /app/seed-media/safestep /app/media/safestep
+fi
+
 echo "Waiting for database..."
 until PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" -c '\q' 2>/dev/null; do
   sleep 2

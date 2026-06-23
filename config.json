@@ -20,7 +20,7 @@
   "themeConfig": {
     "logo": {
       "alt": "Safe Step",
-      "src": "/assets/safestep/logo-safestep.png",
+      "src": "/media/safestep/logo-safestep.png",
       "width": 180,
       "height": 70
     },
