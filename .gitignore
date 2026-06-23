@@ -33,7 +33,6 @@ extensions
 *~
 
 # Evershop local state
-.evershop
 
 # Logs
 npm-debug.log
