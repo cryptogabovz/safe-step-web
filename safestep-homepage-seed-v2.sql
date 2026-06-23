@@ -43,7 +43,7 @@ INSERT INTO widget_instance (name, type, settings, status) VALUES (
       {"id":"m-1","name":"Inicio","url":"/","type":"custom","children":[]},
       {"id":"m-2","name":"Productos","url":"/catalog","type":"custom","children":[
         {"id":"m-2-1","name":"Botas Punta de Acero","url":"/catalog","type":"custom"},
-        {"id":"m-2-2","name":"Ver Todo","url":"/catalog","type":"custom"}
+        {"id":"m-2-2","name":"Ver Catálogo","url":"/catalog","type":"custom"}
       ]},
       {"id":"m-3","name":"Nosotros","url":"/page/nosotros","type":"custom","children":[]},
       {"id":"m-4","name":"Contacto","url":"/page/contacto","type":"custom","children":[]}
