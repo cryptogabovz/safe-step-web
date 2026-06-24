@@ -16,9 +16,7 @@ export function Footer({ copyRight }: FooterProps) {
             <img
               src="/images?src=%2Fmedia%2Fsafestep%2Flogo-blanco.png&w=160&q=90"
               alt="Safe Step"
-              width={160}
-              height={62}
-              style={{ height: 'auto', maxHeight: '52px' }}
+              style={{ width: 'auto', height: 'auto', maxWidth: '160px', maxHeight: '52px', display: 'block' }}
             />
           </a>
         </div>

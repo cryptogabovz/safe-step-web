@@ -17,16 +17,16 @@ function Hero() {
             className="inline-block text-xs font-semibold tracking-widest uppercase mb-4"
             style={{ color: '#187772' }}
           >
-            Calzado de Seguridad Industrial
+            Equipamiento de Seguridad Industrial
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-            Protección Certificada para Quienes
-            <span style={{ color: '#187772' }}> Trabajan de Verdad</span>
+            Todo lo que tu Operación
+            <span style={{ color: '#187772' }}> Necesita para Estar Protegida</span>
           </h1>
           <p className="text-lg text-gray-500 mb-8 max-w-lg leading-relaxed">
-            Punta de acero, suela anti-deslizante y resistencia al agua.
-            Certificadas bajo NOM-113-STPS-2009 e ISO 20345:2011 para
-            construcción, manufactura y minería.
+            Calzado de seguridad, guantes industriales, mangueras de alta
+            presión, discos de corte y EPP certificado. Proveedor confiable
+            para ferreterías, constructoras y distribuidores.
           </p>
           <div className="flex flex-wrap gap-4">
             <a
@@ -89,10 +89,10 @@ function Hero() {
 // ─── Trust Strip ─────────────────────────────────────────────────────────────
 
 const TRUST_ITEMS = [
-  { icon: '🛡️', title: 'Punta de Acero', desc: 'Impactos hasta 200 J' },
-  { icon: '⚡', title: 'Anti-Estático', desc: 'Zonas de riesgo eléctrico' },
-  { icon: '💧', title: 'Resistente al Agua', desc: 'Membrana hidrofugante' },
-  { icon: '🔩', title: 'Anti-Deslizante', desc: 'Superficies húmedas y secas' },
+  { icon: '🛡️', title: 'EPP Certificado', desc: 'Normas ISO y NOM-STPS' },
+  { icon: '🧤', title: 'Catálogo Completo', desc: 'Guantes, botas, mangueras y más' },
+  { icon: '⚙️', title: 'Herramientas Pro', desc: 'Discos de corte y abrasivos' },
+  { icon: '📦', title: 'Envíos Nacionales', desc: 'Entrega rápida a todo el país' },
 ];
 
 function TrustStrip() {
@@ -131,13 +131,15 @@ function IndustrialBanner({
         minHeight: '480px',
       }}
     >
-      {/* Dark gradient overlay */}
+      {/* Base dark overlay — covers full image */}
+      <div className="absolute inset-0" style={{ backgroundColor: 'rgba(5,20,20,0.55)' }} />
+      {/* Directional gradient for text contrast */}
       <div
         className="absolute inset-0"
         style={{
           background: flip
-            ? 'linear-gradient(to left, rgba(0,0,0,0.15) 0%, rgba(10,30,30,0.82) 60%)'
-            : 'linear-gradient(to right, rgba(10,30,30,0.82) 40%, rgba(0,0,0,0.15) 100%)',
+            ? 'linear-gradient(to left, rgba(0,0,0,0) 0%, rgba(10,30,30,0.60) 55%)'
+            : 'linear-gradient(to right, rgba(10,30,30,0.60) 45%, rgba(0,0,0,0) 100%)',
         }}
       />
       <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-24 flex items-center" style={{ minHeight: '480px' }}>
@@ -192,25 +194,26 @@ function FeatureSplit() {
             className="inline-block text-xs font-semibold tracking-widest uppercase mb-4"
             style={{ color: '#187772' }}
           >
-            Tecnología de Vanguardia
+            Calidad en Cada Producto
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
-            Diseñada para Resistir las Condiciones Más Extremas
+            Línea Completa de Equipos de Protección Personal
           </h2>
           <p className="text-gray-500 mb-5 leading-relaxed">
-            Cuero de alta resistencia, puntera de acero certificada, plantilla
-            ergonómica y suela de hule compuesto anti-deslizante.
+            Cumplimos con los más altos estándares de calidad para garantizar
+            la seguridad de tus trabajadores. Desde la cabeza hasta los pies,
+            tenemos el equipo que necesitas.
           </p>
           <p className="text-gray-500 mb-8 leading-relaxed">
-            Cada par pasa por pruebas rigurosas de impacto, compresión y
-            resistencia a la perforación antes de salir de fábrica.
+            Cada producto pasa por rigurosos controles de calidad y cumple con
+            las normas NOM-STPS e ISO vigentes antes de llegar a tus manos.
           </p>
           <ul className="space-y-3 mb-8">
             {[
-              'Cuero split genuino de alta resistencia',
-              'Puntera de acero: protección 200 J',
-              'Suela resistente a hidrocarburos y aceites',
-              'Forro interior antibacterial y transpirable',
+              'Calzado de seguridad con punta de acero certificada 200 J',
+              'Guantes industriales: corte, calor, químicos y mecánicos',
+              'Mangueras de alta presión para aire, agua y fluidos',
+              'Discos de corte, desbaste y abrasivos profesionales',
             ].map((feat) => (
               <li key={feat} className="flex items-start gap-3 text-sm text-gray-700">
                 <svg className="w-5 h-5 mt-0.5 shrink-0" style={{ color: '#187772' }} fill="currentColor" viewBox="0 0 20 20">
@@ -225,7 +228,7 @@ function FeatureSplit() {
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-white font-semibold text-sm transition-opacity hover:opacity-90"
             style={{ backgroundColor: '#187772' }}
           >
-            Ver Todos los Modelos
+            Ver Catálogo Completo
           </a>
         </div>
       </div>
@@ -241,10 +244,10 @@ function CategoriesGrid() {
       <div className="max-w-7xl mx-auto px-6 md:px-10 py-16">
         <div className="text-center mb-12">
           <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#187772' }}>
-            Nuestros Productos
+            Nuestro Catálogo
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
-            Soluciones para Cada Industria
+            Equipamiento Completo para Ferreterías e Industria
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -297,30 +300,25 @@ function CategoriesGrid() {
             </div>
           </a>
           <a
-            href="/"
+            href="/catalog"
             className="group relative overflow-hidden rounded-2xl"
             style={{ backgroundColor: '#1f2937', minHeight: '200px' }}
           >
             <div className="absolute inset-0 flex flex-col justify-center p-6">
-              <h3 className="text-base font-bold text-white mb-1">Certificaciones</h3>
-              <p className="text-gray-400 text-xs mb-3">NOM-113-STPS · ISO 20345:2011</p>
-              <span className="text-xs text-gray-400">Ver normas →</span>
+              <h3 className="text-base font-bold text-white mb-1">Guantes Industriales</h3>
+              <p className="text-gray-400 text-xs mb-3">Corte · Calor · Químicos · Mecánicos</p>
+              <span className="text-xs text-gray-400">Ver modelos →</span>
             </div>
           </a>
           <a
-            href="/"
-            className="group relative overflow-hidden rounded-2xl bg-teal-50"
-            style={{ minHeight: '200px' }}
+            href="/catalog"
+            className="group relative overflow-hidden rounded-2xl"
+            style={{ backgroundColor: '#0f766e', minHeight: '200px' }}
           >
-            <img
-              src={img('/media/safestep/caja-envio.png', 300, 85)}
-              alt="Envíos SafeStep"
-              className="absolute inset-0 w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-teal-900/50 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-5">
-              <h3 className="text-base font-bold text-white">Envíos Nacionales</h3>
-              <span className="text-xs text-teal-100">3–5 días hábiles · Más info →</span>
+            <div className="absolute inset-0 flex flex-col justify-center p-6">
+              <h3 className="text-base font-bold text-white mb-1">Discos y Abrasivos</h3>
+              <p className="text-teal-100 text-xs mb-3">Corte · Desbaste · Pulido · Lijado</p>
+              <span className="text-xs text-teal-200">Ver catálogo →</span>
             </div>
           </a>
         </div>
@@ -332,11 +330,11 @@ function CategoriesGrid() {
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 
 const FAQ_ITEMS = [
-  { q: '¿Qué normas certifican el calzado SafeStep?', a: 'Nuestro calzado cumple con la Norma Oficial Mexicana NOM-113-STPS-2009 y la norma internacional ISO 20345:2011, garantizando la máxima protección en entornos industriales.' },
-  { q: '¿Ofrecen descuentos para compras por volumen?', a: 'Sí, contamos con precios especiales para empresas y distribuidores. Contáctanos para recibir una cotización personalizada según tu volumen de compra.' },
-  { q: '¿Cuánto tiempo dura el calzado SafeStep?', a: 'Con el uso adecuado, nuestras botas tienen una vida útil de 12 a 18 meses. Ofrecemos garantía de 6 meses por defectos de fabricación.' },
+  { q: '¿Qué tipo de productos maneja SafeStep?', a: 'Somos proveedores de equipamiento de seguridad industrial completo: calzado con punta de acero, guantes industriales (corte, calor, químicos), mangueras de alta presión, discos de corte y abrasivos, y EPP en general para ferreterías, constructoras y empresas manufactureras.' },
+  { q: '¿Qué normas de seguridad certifican sus productos?', a: 'Nuestros productos cumplen con las Normas Oficiales Mexicanas NOM-STPS y estándares internacionales como ISO 20345:2011 para calzado, EN 388 para guantes de protección mecánica, y las normas aplicables a cada categoría de producto.' },
+  { q: '¿Ofrecen precios especiales para compras por volumen?', a: 'Sí, contamos con precios especiales para ferreterías, empresas y distribuidores. Contáctanos para recibir una cotización personalizada según tu volumen y frecuencia de compra.' },
   { q: '¿Cuáles son los métodos de pago?', a: 'Aceptamos tarjetas de crédito y débito (Visa, Mastercard, American Express), transferencia bancaria y PayPal.' },
-  { q: '¿Realizan envíos internacionales?', a: 'Sí, enviamos a todo el país y a varios países de América Latina. Los pedidos mayores a $75 USD tienen envío gratuito.' },
+  { q: '¿Realizan envíos a todo el país?', a: 'Sí, enviamos a toda la república y a varios países de América Latina. Los pedidos mayores a $75 USD tienen envío gratuito. El tiempo de entrega es de 3 a 5 días hábiles.' },
 ];
 
 function FaqSection() {
@@ -389,9 +387,9 @@ export default function SafeStepHome() {
       <TrustStrip />
       <IndustrialBanner
         src="/media/safestep/fondo-ferreteria-1.webp"
-        eyebrow="Para cada industria"
-        heading="Calzado que Aguanta donde Otros Fallan"
-        subText="Desde la obra hasta la planta, nuestras botas están diseñadas para las condiciones más exigentes del trabajo industrial."
+        eyebrow="Catálogo Completo"
+        heading="Todo lo que tu Ferretería Necesita en un Solo Lugar"
+        subText="Desde botas con punta de acero y guantes industriales, hasta mangueras de alta presión, discos de corte y abrasivos. El proveedor que tu negocio necesita."
         cta="Ver Catálogo"
         ctaHref="/catalog"
       />

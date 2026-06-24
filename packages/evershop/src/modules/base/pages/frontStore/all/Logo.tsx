@@ -22,9 +22,7 @@ export default function Logo({
           <img
             src={`/images?src=${encodeURIComponent(src)}&w=${width}&q=90`}
             alt={alt}
-            width={width}
-            height={height}
-            style={{ height: 'auto', maxHeight: `${height}px` }}
+            style={{ width: 'auto', height: 'auto', maxWidth: `${width}px`, maxHeight: `${height}px`, display: 'block' }}
           />
         </a>
       )}
