@@ -38,4 +38,20 @@ echo "Seeding about/contact pages..."
 PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" < /app/safestep-about-contact.sql
 echo "Seed complete."
 
+# Create admin user if ADMIN_EMAIL and ADMIN_PASSWORD are set (idempotent — skips if email exists)
+if [ -n "$ADMIN_EMAIL" ] && [ -n "$ADMIN_PASSWORD" ]; then
+  echo "Creating admin user if not exists..."
+  ADMIN_HASH=$(node -e "
+const b = require('/app/node_modules/bcryptjs');
+process.stdout.write(b.hashSync(process.env.ADMIN_PASSWORD, b.genSaltSync(10)));
+")
+  _ADMIN_NAME="${ADMIN_NAME:-Administrador}"
+  PGPASSWORD="$DB_PASSWORD" psql -h "$DB_HOST" -p "${DB_PORT:-5432}" -U "$DB_USER" -d "$DB_NAME" \
+    -v email="$ADMIN_EMAIL" \
+    -v hashed="$ADMIN_HASH" \
+    -v fullname="$_ADMIN_NAME" \
+    -c "INSERT INTO admin_user (email, password, full_name, status) VALUES (:'email', :'hashed', :'fullname', true) ON CONFLICT (email) DO NOTHING;"
+  echo "Admin user ready: $ADMIN_EMAIL"
+fi
+
 wait $APP_PID

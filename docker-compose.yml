@@ -10,6 +10,9 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-postgres}
       DB_USER: ${DB_USER:-postgres}
       DB_NAME: ${DB_NAME:-postgres}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      ADMIN_NAME: ${ADMIN_NAME:-Administrador}
     volumes:
       - media-data:/app/media
     depends_on:
