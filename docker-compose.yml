@@ -13,6 +13,9 @@ services:
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       ADMIN_NAME: ${ADMIN_NAME:-Administrador}
+      EVERSHOP_HOME_URL: ${EVERSHOP_HOME_URL}
+      GHL_LOCATION_ID: ${GHL_LOCATION_ID}
+      GHL_API_KEY: ${GHL_API_KEY}
     volumes:
       - media-data:/app/media
     depends_on:

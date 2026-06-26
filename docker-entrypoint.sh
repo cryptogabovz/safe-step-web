@@ -42,10 +42,17 @@ echo "Seed complete."
 if [ -n "$ADMIN_EMAIL" ] && [ -n "$ADMIN_PASSWORD" ]; then
   echo "Creating admin user if not exists..."
   node -e "
-const { Pool } = require('/app/node_modules/pg');
-const bcrypt = require('/app/node_modules/bcryptjs');
+function tryRequire() {
+  for (var i = 0; i < arguments.length; i++) {
+    try { return require(arguments[i]); } catch(e) {}
+  }
+  throw new Error('Module not found in any of: ' + Array.from(arguments).join(', '));
+}
+var pg     = tryRequire('/app/node_modules/pg', '/app/packages/evershop/node_modules/pg');
+var bcrypt = tryRequire('/app/node_modules/bcryptjs', '/app/packages/evershop/node_modules/bcryptjs');
+var Pool   = pg.Pool;
 
-const pool = new Pool({
+var pool = new Pool({
   host: process.env.DB_HOST,
   port: parseInt(process.env.DB_PORT || '5432'),
   user: process.env.DB_USER,
@@ -54,8 +61,8 @@ const pool = new Pool({
 });
 
 async function run() {
-  const hash = bcrypt.hashSync(process.env.ADMIN_PASSWORD, bcrypt.genSaltSync(10));
-  const name = process.env.ADMIN_NAME || 'Administrador';
+  var hash = bcrypt.hashSync(process.env.ADMIN_PASSWORD, bcrypt.genSaltSync(10));
+  var name = process.env.ADMIN_NAME || 'Administrador';
   await pool.query(
     'INSERT INTO admin_user (email, password, full_name, status) VALUES (\$1, \$2, \$3, true) ON CONFLICT (email) DO NOTHING',
     [process.env.ADMIN_EMAIL, hash, name]
@@ -64,8 +71,8 @@ async function run() {
   console.log('Admin user ready: ' + process.env.ADMIN_EMAIL);
 }
 
-run().catch(e => { console.error('Admin create error:', e.message); process.exit(0); });
-"
+run().catch(function(e) { console.error('Admin create error:', e.message); process.exit(0); });
+" || echo "Warning: admin user creation skipped"
 fi
 
 wait $APP_PID
