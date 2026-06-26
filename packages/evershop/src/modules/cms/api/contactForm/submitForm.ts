@@ -1,7 +1,12 @@
 import { OK, INTERNAL_SERVER_ERROR, INVALID_PAYLOAD } from '../../../../lib/util/httpStatus.js';
 
 export default async (request, response, next) => {
-  const { name, email, phone, company, message, interest } = request.body || {};
+  const { name, email, phone, company, message, interest, website } = request.body || {};
+
+  if (website) {
+    response.status(200).json({ success: true });
+    return;
+  }
 
   if (!name || !email || !message) {
     response.status(INVALID_PAYLOAD).json({ error: 'Nombre, email y mensaje son requeridos.' });

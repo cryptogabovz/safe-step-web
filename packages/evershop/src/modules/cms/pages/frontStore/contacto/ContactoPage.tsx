@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 
+function img(src: string, w: number, q = 80): string {
+  return `/images?src=${encodeURIComponent(src)}&w=${w}&q=${q}`;
+}
+
 type FormState = 'idle' | 'sending' | 'success' | 'error';
 
 const INTERESTS = [
@@ -17,6 +21,7 @@ function ContactForm() {
   const [form, setForm] = useState({
     name: '', email: '', phone: '', company: '', interest: '', message: ''
   });
+  const [honeypot, setHoneypot] = useState('');
 
   const set = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setForm((f) => ({ ...f, [field]: e.target.value }));
@@ -25,6 +30,10 @@ function ContactForm() {
     e.preventDefault();
     setState('sending');
     setErrorMsg('');
+    if (honeypot) {
+      setState('success');
+      return;
+    }
     try {
       const res = await fetch('/contactForm', {
         method: 'POST',
@@ -74,7 +83,7 @@ function ContactForm() {
   const ringStyle = { '--tw-ring-color': '#187772' } as React.CSSProperties;
 
   return (
-    <form onSubmit={submit} className="space-y-5">
+    <form onSubmit={submit} className="space-y-5" style={{ position: 'relative' }}>
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
           <label className="block text-xs font-semibold text-gray-600 mb-1.5">Nombre completo *</label>
@@ -112,6 +121,19 @@ function ContactForm() {
           placeholder="Cuéntanos qué necesitas: volumen estimado, industria, fechas de entrega..."
           className={`${inputClass} resize-none`}
           style={ringStyle}
+        />
+      </div>
+      {/* honeypot — invisible to humans, bots fill it and get silently ignored */}
+      <div style={{ position: 'absolute', left: '-9999px', top: '-9999px' }} aria-hidden="true">
+        <label htmlFor="hp_website">Website</label>
+        <input
+          id="hp_website"
+          name="website"
+          type="text"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
         />
       </div>
       {state === 'error' && (
@@ -182,20 +204,22 @@ export default function ContactoPage() {
     <div className="min-h-screen bg-white">
 
       {/* Header */}
-      <div className="bg-gray-50 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 md:px-10 py-12">
-          <nav className="text-xs text-gray-400 mb-4 flex items-center gap-2">
-            <a href="/" className="hover:text-gray-600 transition-colors">Inicio</a>
-            <span>/</span>
-            <span className="text-gray-700">Contacto</span>
-          </nav>
-          <span className="inline-block text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: '#187772' }}>
+      <div className="relative overflow-hidden" style={{ backgroundColor: '#0d2929' }}>
+        <img
+          src={img('/media/safestep/fondo-ferreteria-1.webp', 1600, 75)}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ opacity: 0.18 }}
+        />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(24,119,114,0.55) 0%, rgba(5,30,30,0.7) 100%)' }} />
+        <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20">
+          <span className="inline-block text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: '#7de8e2' }}>
             Hablemos
           </span>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+          <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-3">
             ¿Cómo podemos ayudarte?
           </h1>
-          <p className="text-gray-500 mt-2 max-w-xl leading-relaxed">
+          <p className="text-gray-300 max-w-xl leading-relaxed text-base">
             Cotizaciones empresariales, consultas técnicas o información de productos.
             Respondemos en menos de 24 horas hábiles.
           </p>

@@ -52,7 +52,7 @@ const CERTS = [
 
 export default function NosotrosPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white">
 
       {/* Hero */}
       <section className="relative overflow-hidden bg-gray-900">
@@ -62,11 +62,6 @@ export default function NosotrosPage() {
           className="absolute inset-0 w-full h-full object-cover opacity-30"
         />
         <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-24 md:py-32">
-          <nav className="text-xs text-gray-400 mb-6 flex items-center gap-2">
-            <a href="/" className="hover:text-gray-200 transition-colors">Inicio</a>
-            <span>/</span>
-            <span className="text-gray-200">Nosotros</span>
-          </nav>
           <span className="inline-block text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: '#4dd6cf' }}>
             Quiénes Somos
           </span>
@@ -150,7 +145,7 @@ export default function NosotrosPage() {
       </section>
 
       {/* Stats */}
-      <section className="bg-white">
+      <section className="bg-gray-50 border-y border-gray-100">
         <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
             { num: '10+', label: 'Años de experiencia' },
