@@ -95,21 +95,21 @@ INSERT INTO widget_placement (widget_instance_id, route, area, sort_order) VALUE
 
 END $$;
 
+COMMIT;
+
 -- ============================================================
--- Admin language: Spanish
+-- Settings (autocommit, FUERA de la transacción de widgets para que
+-- apliquen aunque algo más cambie).
+-- OJO: la columna is_json es BOOLEAN → usar false, NO 0
+-- (0 es integer y da "column is of type boolean..." que aborta el seed).
 -- ============================================================
 INSERT INTO setting (name, value, is_json)
-VALUES ('adminLanguage', 'es', 0)
+VALUES ('adminLanguage', 'es', false)
 ON CONFLICT (name) DO UPDATE SET value = 'es';
 
--- ============================================================
--- Store name / marca (título de página, fallback de <title>)
--- ============================================================
 INSERT INTO setting (name, value, is_json)
-VALUES ('storeName', 'Safe Step', 0)
+VALUES ('storeName', 'Safe Step', false)
 ON CONFLICT (name) DO UPDATE SET value = 'Safe Step';
-
-COMMIT;
 
 SELECT wi.name, wi.type, wp.route, wp.area, wp.sort_order
 FROM widget_instance wi
