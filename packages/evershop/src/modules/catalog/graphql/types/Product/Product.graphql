@@ -11,6 +11,7 @@ type Product {
   noShippingRequired: Boolean
   taxClass: Int
   description: JSON
+  shortDescription: String
   urlKey: String
   metaTitle: String
   metaDescription: String

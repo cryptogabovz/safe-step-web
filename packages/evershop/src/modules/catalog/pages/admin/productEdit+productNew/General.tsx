@@ -1,7 +1,7 @@
 import { CategorySelector } from '@components/admin/CategorySelector.js';
 import Area from '@components/common/Area.js';
-import { Editor } from '@components/common/form/Editor.js';
 import { InputField } from '@components/common/form/InputField.js';
+import { TextareaField } from '@components/common/form/TextareaField.js';
 import { NumberField } from '@components/common/form/NumberField.js';
 import { SelectField } from '@components/common/form/SelectField.js';
 import { Button } from '@components/common/ui/Button.js';
@@ -197,15 +197,7 @@ const CategorySelect: React.FC<{
 
 interface GeneralProps {
   product?: {
-    description?: Array<{
-      id: string;
-      size: number;
-      columns: Array<{
-        id: string;
-        size: number;
-        data: object;
-      }>;
-    }>;
+    shortDescription?: string;
     name: string;
     price: {
       regular: {
@@ -318,10 +310,17 @@ export default function General({
             {
               component: {
                 default: (
-                  <Editor
-                    name="description"
+                  <TextareaField
+                    name="short_description"
                     label={_('Description')}
-                    value={product?.description}
+                    defaultValue={product?.shortDescription || ''}
+                    rows={8}
+                    placeholder={_(
+                      'Describe the product: materials, sizes, certifications, usage…'
+                    )}
+                    helperText={_(
+                      'This text is shown on the product detail page seen by customers.'
+                    )}
                   />
                 )
               },
@@ -346,7 +345,7 @@ export const query = `
       productId
       uuid
       name
-      description
+      shortDescription
       sku
       taxClass
       price {
