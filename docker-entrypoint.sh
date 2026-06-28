@@ -75,4 +75,14 @@ run().catch(function(e) { console.error('Admin create error:', e.message); proce
 " || echo "Warning: admin user creation skipped"
 fi
 
+# La app cachea los settings en memoria al arrancar, y arrancó ANTES del seed,
+# así que NO tomó storeName/adminLanguage (quedaron en su valor por defecto).
+# Reiniciamos la app para que relea los settings ya sembrados. Las migraciones
+# ya corrieron en el primer arranque, así que este reinicio es rápido.
+echo "Restarting app to apply seeded settings..."
+kill "$APP_PID" 2>/dev/null || true
+wait "$APP_PID" 2>/dev/null || true
+npm run start &
+APP_PID=$!
+
 wait $APP_PID
