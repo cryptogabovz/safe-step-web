@@ -1,10 +1,89 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SafeStepDesign, {
   img,
   SS,
   Eyebrow,
   CropCorners
 } from '../safestepShared/SafeStepDesign.js';
+
+// ─── Hero boot carousel ───────────────────────────────────────────────────────
+
+const HERO_SHOTS = [
+  { src: '/media/safestep/bota-frente.png', alt: 'Bota de seguridad SafeStep — vista frontal' },
+  { src: '/media/safestep/bota-lateral.png', alt: 'Bota de seguridad SafeStep — vista lateral' },
+  { src: '/media/safestep/suela.png', alt: 'Suela anti-deslizante SafeStep' }
+];
+
+const HERO_INTERVAL = 2800;
+
+function HeroBootCarousel() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    // Respeta reduced-motion: sin auto-rotación (los puntos siguen disponibles).
+    if (
+      typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return undefined;
+    }
+    const id = setInterval(
+      () => setActive((prev) => (prev + 1) % HERO_SHOTS.length),
+      HERO_INTERVAL
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <div className="ss-rise ss-crop relative p-6" style={{ animationDelay: '180ms' }}>
+      <CropCorners />
+      <div
+        className="absolute inset-8 rounded-full opacity-30"
+        style={{ background: `radial-gradient(circle, ${SS.teal}, transparent 70%)` }}
+      />
+      <div
+        className="ss-scan relative z-10 mx-auto"
+        style={{ height: 'clamp(360px, 52vw, 520px)', maxWidth: '560px' }}
+      >
+        {HERO_SHOTS.map((shot, idx) => (
+          <img
+            key={shot.src}
+            src={img(shot.src, 760, 90)}
+            alt={idx === active ? shot.alt : ''}
+            aria-hidden={idx === active ? undefined : true}
+            width={560}
+            height={560}
+            className="absolute inset-0 w-full h-full object-contain drop-shadow-2xl"
+            style={{ opacity: idx === active ? 1 : 0, transition: 'opacity .9s ease' }}
+          />
+        ))}
+      </div>
+      <span
+        className="ss-label absolute z-20 top-2 right-2 px-2 py-1 rounded"
+        style={{ backgroundColor: SS.amber, color: SS.ink, fontSize: '.6rem' }}
+      >
+        200 J · S3
+      </span>
+      <div className="absolute z-20 bottom-1 left-1/2 -translate-x-1/2 flex gap-2">
+        {HERO_SHOTS.map((shot, idx) => (
+          <button
+            key={shot.src}
+            type="button"
+            aria-label={`Ver ${shot.alt}`}
+            onClick={() => setActive(idx)}
+            className="rounded-full transition-all"
+            style={{
+              width: idx === active ? '20px' : '7px',
+              height: '7px',
+              backgroundColor: idx === active ? SS.amber : 'rgba(233,246,244,.45)'
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 // ─── Hero ────────────────────────────────────────────────────────────────────
 
@@ -77,29 +156,9 @@ function Hero() {
           </div>
         </div>
 
-        {/* Boot image — marco técnico */}
+        {/* Boot image — carrusel en bucle (frente → lateral → suela) */}
         <div className="order-1 md:order-2 relative flex justify-center">
-          <div className="ss-rise ss-crop relative p-6" style={{ animationDelay: '180ms' }}>
-            <CropCorners />
-            <div
-              className="absolute inset-8 rounded-full opacity-30"
-              style={{ background: `radial-gradient(circle, ${SS.teal}, transparent 70%)` }}
-            />
-            <img
-              src={img('/media/safestep/calzado-hero.png', 760, 90)}
-              alt="Calzado de seguridad SafeStep"
-              width={560}
-              height={560}
-              className="ss-scan relative z-10 object-contain drop-shadow-2xl"
-              style={{ maxHeight: '520px', height: 'auto' }}
-            />
-            <span
-              className="ss-label absolute z-20 top-2 right-2 px-2 py-1 rounded"
-              style={{ backgroundColor: SS.amber, color: SS.ink, fontSize: '.6rem' }}
-            >
-              200 J · S3
-            </span>
-          </div>
+          <HeroBootCarousel />
         </div>
       </div>
       <div className="ss-hazard h-2 w-full" />
