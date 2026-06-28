@@ -35,6 +35,7 @@ fi
 echo "Copiando imágenes de Safe Step a: $MEDIA_DIR"
 cp -v "$SOURCE_DIR"/*.png "$MEDIA_DIR/" 2>/dev/null || true
 cp -v "$SOURCE_DIR"/*.jpg "$MEDIA_DIR/" 2>/dev/null || true
+cp -v "$SOURCE_DIR"/*.webp "$MEDIA_DIR/" 2>/dev/null || true
 
 echo ""
 echo "✓ Imágenes copiadas correctamente."

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-
-function img(src: string, w: number, q = 80): string {
-  return `/images?src=${encodeURIComponent(src)}&w=${w}&q=${q}`;
-}
+import SafeStepDesign, {
+  img,
+  SS,
+  Eyebrow,
+  CropCorners
+} from '../safestepShared/SafeStepDesign.js';
 
 type FormState = 'idle' | 'sending' | 'success' | 'error';
 
@@ -12,7 +14,7 @@ const INTERESTS = [
   'Mangueras de alta presión',
   'Discos de corte y abrasivos',
   'Cotización empresarial',
-  'Otro',
+  'Otro'
 ];
 
 function ContactForm() {
@@ -38,7 +40,7 @@ function ContactForm() {
       const res = await fetch('/contactForm', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify(form)
       });
       const data = await res.json();
       if (!res.ok || data.error) {
@@ -56,22 +58,19 @@ function ContactForm() {
   if (state === 'success') {
     return (
       <div className="flex flex-col items-center justify-center py-16 text-center">
-        <div
-          className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5"
-          style={{ backgroundColor: '#e8f5f4' }}
-        >
-          <svg className="w-8 h-8" style={{ color: '#187772' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-5" style={{ backgroundColor: SS.amber }}>
+          <svg className="w-8 h-8" style={{ color: SS.ink }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2">¡Mensaje enviado!</h3>
+        <h3 className="ss-display text-2xl text-gray-900 mb-2" style={{ fontWeight: 700 }}>¡Mensaje enviado!</h3>
         <p className="text-gray-500 text-sm max-w-xs">
           Recibimos tu consulta. Te contactaremos a <strong>{form.email}</strong> en las próximas 24 horas hábiles.
         </p>
         <button
           onClick={() => { setState('idle'); setForm({ name: '', email: '', phone: '', company: '', interest: '', message: '' }); }}
-          className="mt-6 text-sm font-medium transition-colors hover:opacity-80"
-          style={{ color: '#187772' }}
+          className="ss-label mt-6 transition-colors hover:opacity-80"
+          style={{ color: SS.teal }}
         >
           Enviar otro mensaje →
         </button>
@@ -79,40 +78,40 @@ function ContactForm() {
     );
   }
 
-  const inputClass = "w-full border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent bg-white transition";
-  const ringStyle = { '--tw-ring-color': '#187772' } as React.CSSProperties;
+  const inputClass = 'ss-input w-full border rounded-lg px-4 py-3 text-sm text-gray-800 placeholder-gray-400 bg-white';
+  const inputStyle = { borderColor: SS.mint } as React.CSSProperties;
 
   return (
     <form onSubmit={submit} className="space-y-5" style={{ position: 'relative' }}>
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1.5">Nombre completo *</label>
-          <input required value={form.name} onChange={set('name')} placeholder="Tu nombre" className={inputClass} style={ringStyle} />
+          <label className="ss-label block mb-1.5" style={{ color: '#6b7280', fontSize: '.62rem' }}>Nombre completo *</label>
+          <input required value={form.name} onChange={set('name')} placeholder="Tu nombre" className={inputClass} style={inputStyle} />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1.5">Correo electrónico *</label>
-          <input required type="email" value={form.email} onChange={set('email')} placeholder="tu@empresa.com" className={inputClass} style={ringStyle} />
+          <label className="ss-label block mb-1.5" style={{ color: '#6b7280', fontSize: '.62rem' }}>Correo electrónico *</label>
+          <input required type="email" value={form.email} onChange={set('email')} placeholder="tu@empresa.com" className={inputClass} style={inputStyle} />
         </div>
       </div>
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1.5">Teléfono / WhatsApp</label>
-          <input type="tel" value={form.phone} onChange={set('phone')} placeholder="+52 55 1234 5678" className={inputClass} style={ringStyle} />
+          <label className="ss-label block mb-1.5" style={{ color: '#6b7280', fontSize: '.62rem' }}>Teléfono / WhatsApp</label>
+          <input type="tel" value={form.phone} onChange={set('phone')} placeholder="+52 55 1234 5678" className={inputClass} style={inputStyle} />
         </div>
         <div>
-          <label className="block text-xs font-semibold text-gray-600 mb-1.5">Empresa</label>
-          <input value={form.company} onChange={set('company')} placeholder="Nombre de tu empresa" className={inputClass} style={ringStyle} />
+          <label className="ss-label block mb-1.5" style={{ color: '#6b7280', fontSize: '.62rem' }}>Empresa</label>
+          <input value={form.company} onChange={set('company')} placeholder="Nombre de tu empresa" className={inputClass} style={inputStyle} />
         </div>
       </div>
       <div>
-        <label className="block text-xs font-semibold text-gray-600 mb-1.5">¿En qué producto estás interesado?</label>
-        <select value={form.interest} onChange={set('interest')} className={inputClass} style={ringStyle}>
+        <label className="ss-label block mb-1.5" style={{ color: '#6b7280', fontSize: '.62rem' }}>¿En qué producto estás interesado?</label>
+        <select value={form.interest} onChange={set('interest')} className={inputClass} style={inputStyle}>
           <option value="">Selecciona una opción</option>
           {INTERESTS.map((i) => <option key={i} value={i}>{i}</option>)}
         </select>
       </div>
       <div>
-        <label className="block text-xs font-semibold text-gray-600 mb-1.5">Mensaje *</label>
+        <label className="ss-label block mb-1.5" style={{ color: '#6b7280', fontSize: '.62rem' }}>Mensaje *</label>
         <textarea
           required
           rows={5}
@@ -120,7 +119,7 @@ function ContactForm() {
           onChange={set('message')}
           placeholder="Cuéntanos qué necesitas: volumen estimado, industria, fechas de entrega..."
           className={`${inputClass} resize-none`}
-          style={ringStyle}
+          style={inputStyle}
         />
       </div>
       {/* honeypot — invisible to humans, bots fill it and get silently ignored */}
@@ -142,8 +141,7 @@ function ContactForm() {
       <button
         type="submit"
         disabled={state === 'sending'}
-        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg text-white font-semibold text-sm transition-opacity hover:opacity-90 disabled:opacity-60"
-        style={{ backgroundColor: '#187772' }}
+        className="ss-btn ss-btn-primary w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-md font-bold text-sm disabled:opacity-60"
       >
         {state === 'sending' ? (
           <>
@@ -175,7 +173,7 @@ const INFO_ITEMS = [
     ),
     label: 'Correo',
     value: 'contacto@aresafestep.com',
-    href: 'mailto:contacto@aresafestep.com',
+    href: 'mailto:contacto@aresafestep.com'
   },
   {
     icon: (
@@ -185,7 +183,7 @@ const INFO_ITEMS = [
     ),
     label: 'Oficina',
     value: '8603 NW 54th Street, Doral FL 33166, USA',
-    href: null,
+    href: null
   },
   {
     icon: (
@@ -195,111 +193,123 @@ const INFO_ITEMS = [
     ),
     label: 'Horario',
     value: 'Lun – Vie: 9:00 AM – 6:00 PM EST',
-    href: null,
-  },
+    href: null
+  }
 ];
 
 export default function ContactoPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="ss min-h-screen bg-white">
+      <SafeStepDesign />
 
       {/* Header */}
-      <div className="relative overflow-hidden" style={{ backgroundColor: '#0d2929' }}>
+      <div className="ss-grain relative overflow-hidden" style={{ backgroundColor: SS.ink }}>
         <img
           src={img('/media/safestep/fondo-ferreteria-1.webp', 1600, 75)}
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ opacity: 0.18 }}
+          style={{ opacity: 0.2 }}
         />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(24,119,114,0.55) 0%, rgba(5,30,30,0.7) 100%)' }} />
-        <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20">
-          <span className="inline-block text-xs font-semibold tracking-widest uppercase mb-4" style={{ color: '#7de8e2' }}>
-            Hablemos
-          </span>
-          <h1 className="text-3xl md:text-5xl font-bold text-white leading-tight mb-3">
+        <div className="ss-grid absolute inset-0" />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(24,119,114,0.5) 0%, rgba(6,24,22,0.78) 100%)' }} />
+        <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24">
+          <div className="ss-rise" style={{ animationDelay: '40ms' }}>
+            <Eyebrow color={SS.amber}>Hablemos</Eyebrow>
+          </div>
+          <h1
+            className="ss-display ss-rise text-white mt-6 mb-3"
+            style={{ animationDelay: '120ms', fontSize: 'clamp(2.4rem,5vw,4.4rem)', fontWeight: 700 }}
+          >
             ¿Cómo podemos ayudarte?
           </h1>
-          <p className="text-gray-300 max-w-xl leading-relaxed text-base">
-            Cotizaciones empresariales, consultas técnicas o información de productos.
-            Respondemos en menos de 24 horas hábiles.
+          <p className="ss-rise max-w-xl leading-relaxed text-base" style={{ animationDelay: '200ms', color: 'rgba(233,246,244,.78)' }}>
+            Cotizaciones empresariales, consultas técnicas o información de
+            productos. Respondemos en menos de 24 horas hábiles.
           </p>
         </div>
+        <div className="ss-hazard h-2 w-full" />
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 md:px-10 py-16">
-        <div className="grid lg:grid-cols-5 gap-14">
+      <div style={{ backgroundColor: SS.paper }}>
+        <div className="max-w-7xl mx-auto px-6 md:px-10 py-16">
+          <div className="grid lg:grid-cols-5 gap-14">
 
-          {/* Left — Info */}
-          <div className="lg:col-span-2 space-y-10">
+            {/* Left — Info */}
+            <div className="lg:col-span-2 space-y-10">
+              <div className="space-y-6">
+                {INFO_ITEMS.map((item) => (
+                  <div key={item.label} className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: SS.mint, color: SS.teal }}>
+                      {item.icon}
+                    </div>
+                    <div>
+                      <div className="ss-label mb-0.5" style={{ color: '#9ca3af', fontSize: '.6rem' }}>{item.label}</div>
+                      {item.href ? (
+                        <a href={item.href} className="text-sm text-gray-800 hover:opacity-70 transition-opacity font-semibold">{item.value}</a>
+                      ) : (
+                        <span className="text-sm text-gray-800 font-semibold">{item.value}</span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
 
-            <div className="space-y-6">
-              {INFO_ITEMS.map((item) => (
-                <div key={item.label} className="flex items-start gap-4">
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: '#e8f5f4', color: '#187772' }}
-                  >
-                    {item.icon}
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-0.5">{item.label}</div>
-                    {item.href ? (
-                      <a href={item.href} className="text-sm text-gray-800 hover:opacity-70 transition-opacity font-medium">{item.value}</a>
-                    ) : (
-                      <span className="text-sm text-gray-800 font-medium">{item.value}</span>
-                    )}
-                  </div>
+              {/* Cotización info */}
+              <div className="ss-crop relative rounded-2xl p-7" style={{ backgroundColor: SS.ink }}>
+                <CropCorners />
+                <span className="ss-label" style={{ color: SS.amber, fontSize: '.62rem' }}>Mayoreo</span>
+                <h3 className="ss-display text-2xl text-white mt-2 mb-2" style={{ fontWeight: 700 }}>Cotizaciones Empresariales</h3>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: 'rgba(233,246,244,.75)' }}>
+                  Para pedidos al mayoreo, distribución o contratos corporativos,
+                  envíanos tu solicitud con volumen estimado y te preparamos una
+                  propuesta personalizada.
+                </p>
+                <div className="ss-label inline-flex items-center gap-2" style={{ color: SS.teal300, fontSize: '.62rem' }}>
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: SS.amber }} />
+                  Respuesta en 24 hrs hábiles
                 </div>
-              ))}
-            </div>
+              </div>
 
-            {/* Cotización info */}
-            <div className="rounded-2xl p-6" style={{ backgroundColor: '#e8f5f4' }}>
-              <h3 className="font-bold text-gray-900 mb-2">Cotizaciones Empresariales</h3>
-              <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                Para pedidos al mayoreo, distribución o contratos corporativos,
-                envíanos tu solicitud con volumen estimado y te preparamos una
-                propuesta personalizada.
-              </p>
-              <div className="text-xs font-semibold" style={{ color: '#187772' }}>
-                Respuesta garantizada en 24 hrs hábiles
+              {/* Garantías */}
+              <div className="space-y-3">
+                {[
+                  'Garantía de 6 meses en calzado de seguridad',
+                  'Productos certificados NOM-STPS e ISO',
+                  'Envíos a toda América Latina'
+                ].map((g) => (
+                  <div key={g} className="flex items-start gap-2.5 text-sm text-gray-600">
+                    <span className="shrink-0 mt-0.5 w-4 h-4 rounded flex items-center justify-center" style={{ backgroundColor: SS.amber }}>
+                      <svg className="w-3 h-3" style={{ color: SS.ink }} fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    {g}
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Garantías */}
-            <div className="space-y-3">
-              {[
-                'Garantía de 6 meses en calzado de seguridad',
-                'Productos certificados NOM-STPS e ISO',
-                'Envíos a toda América Latina',
-              ].map((g) => (
-                <div key={g} className="flex items-start gap-2.5 text-sm text-gray-600">
-                  <svg className="w-4 h-4 mt-0.5 shrink-0" style={{ color: '#187772' }} fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  {g}
+            {/* Right — Form */}
+            <div className="lg:col-span-3">
+              <div className="ss-card bg-white border rounded-2xl p-8 shadow-sm" style={{ borderColor: SS.mint }}>
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="ss-label" style={{ color: SS.teal }}>Formulario</span>
+                  <span className="flex-1 h-px" style={{ backgroundColor: SS.mint }} />
                 </div>
-              ))}
+                <h2 className="ss-display text-2xl text-gray-900 mb-6" style={{ fontWeight: 700 }}>Envíanos un mensaje</h2>
+                <ContactForm />
+              </div>
             </div>
-          </div>
 
-          {/* Right — Form */}
-          <div className="lg:col-span-3">
-            <div className="bg-white border border-gray-100 rounded-2xl p-8 shadow-sm">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Envíanos un mensaje</h2>
-              <ContactForm />
-            </div>
           </div>
-
         </div>
       </div>
-
     </div>
   );
 }
 
 export const layout = {
   areaId: 'content',
-  sortOrder: 10,
+  sortOrder: 10
 };

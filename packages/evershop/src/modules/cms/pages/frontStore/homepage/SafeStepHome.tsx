@@ -1,38 +1,50 @@
 import React, { useState } from 'react';
-
-// Image helper — routes through EverShop's image optimizer
-function img(src: string, w: number, q = 80): string {
-  return `/images?src=${encodeURIComponent(src)}&w=${w}&q=${q}`;
-}
+import SafeStepDesign, {
+  img,
+  SS,
+  Eyebrow,
+  CropCorners
+} from '../safestepShared/SafeStepDesign.js';
 
 // ─── Hero ────────────────────────────────────────────────────────────────────
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-white">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
+    <section
+      className="ss-grain relative overflow-hidden"
+      style={{ backgroundColor: SS.ink }}
+    >
+      <div className="ss-grid absolute inset-0" />
+      {/* halo teal */}
+      <div
+        className="absolute -top-40 -right-40 w-[640px] h-[640px] rounded-full"
+        style={{ background: 'radial-gradient(circle, rgba(24,119,114,.35), transparent 70%)' }}
+      />
+      <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
         {/* Copy */}
         <div className="order-2 md:order-1">
-          <span
-            className="inline-block text-xs font-semibold tracking-widest uppercase mb-4"
-            style={{ color: '#187772' }}
+          <div className="ss-rise" style={{ animationDelay: '40ms' }}>
+            <Eyebrow color={SS.amber}>EPP Certificado // Industrial</Eyebrow>
+          </div>
+          <h1
+            className="ss-display ss-rise text-white mt-6 mb-6"
+            style={{ animationDelay: '120ms', fontSize: 'clamp(2.8rem,6vw,5.4rem)', fontWeight: 700 }}
           >
-            Equipamiento de Seguridad Industrial
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-            Todo lo que tu Operación
-            <span style={{ color: '#187772' }}> Necesita para Estar Protegida</span>
+            Todo lo que tu operación
+            <span style={{ color: SS.teal300 }}> necesita para estar protegida</span>
           </h1>
-          <p className="text-lg text-gray-500 mb-8 max-w-lg leading-relaxed">
+          <p
+            className="ss-rise text-base md:text-lg mb-8 max-w-lg leading-relaxed"
+            style={{ animationDelay: '200ms', color: 'rgba(233,246,244,.72)' }}
+          >
             Calzado de seguridad, guantes industriales, mangueras de alta
-            presión, discos de corte y EPP certificado. Proveedor confiable
-            para ferreterías, constructoras y distribuidores.
+            presión, discos de corte y EPP certificado. Proveedor confiable para
+            ferreterías, constructoras y distribuidores.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="ss-rise flex flex-wrap gap-4" style={{ animationDelay: '280ms' }}>
             <a
               href="/catalog"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-white font-semibold text-sm transition-opacity hover:opacity-90"
-              style={{ backgroundColor: '#187772' }}
+              className="ss-btn ss-btn-amber inline-flex items-center gap-2 px-7 py-3.5 rounded-md font-bold text-sm"
             >
               Ver Catálogo
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -40,48 +52,57 @@ function Hero() {
               </svg>
             </a>
             <a
-              href="/"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-semibold text-sm border-2 transition-colors hover:bg-gray-50"
-              style={{ borderColor: '#187772', color: '#187772' }}
+              href="/contacto"
+              className="ss-btn inline-flex items-center gap-2 px-7 py-3.5 rounded-md font-semibold text-sm border text-white"
+              style={{ borderColor: 'rgba(233,246,244,.3)' }}
             >
               Cotizar Ahora
             </a>
           </div>
-          {/* Social proof */}
-          <div className="mt-10 flex items-center gap-6 border-t border-gray-100 pt-8">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-gray-900">10+</div>
-              <div className="text-xs text-gray-400 mt-0.5">Años de experiencia</div>
-            </div>
-            <div className="w-px h-10 bg-gray-200" />
-            <div className="text-center">
-              <div className="text-2xl font-bold text-gray-900">ISO</div>
-              <div className="text-xs text-gray-400 mt-0.5">20345:2011</div>
-            </div>
-            <div className="w-px h-10 bg-gray-200" />
-            <div className="text-center">
-              <div className="text-2xl font-bold text-gray-900">NOM</div>
-              <div className="text-xs text-gray-400 mt-0.5">113-STPS-2009</div>
-            </div>
+          {/* Spec readout */}
+          <div
+            className="ss-rise mt-12 grid grid-cols-3 gap-px overflow-hidden rounded-md"
+            style={{ animationDelay: '360ms', backgroundColor: 'rgba(233,246,244,.12)', border: '1px solid rgba(233,246,244,.12)' }}
+          >
+            {[
+              { v: '10+', l: 'AÑOS EXP.' },
+              { v: 'ISO', l: '20345:2011' },
+              { v: 'NOM', l: '113-STPS' }
+            ].map((s) => (
+              <div key={s.l} className="px-5 py-4 text-center" style={{ backgroundColor: SS.ink }}>
+                <div className="ss-display text-2xl md:text-3xl text-white" style={{ fontWeight: 700 }}>{s.v}</div>
+                <div className="ss-label mt-1" style={{ color: SS.teal300, fontSize: '.6rem' }}>{s.l}</div>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Boot image */}
-        <div className="order-1 md:order-2 flex justify-center md:justify-end relative">
-          <div
-            className="absolute inset-0 rounded-3xl opacity-10"
-            style={{ backgroundColor: '#187772', transform: 'scale(0.85) translateX(8%)' }}
-          />
-          <img
-            src={img('/media/safestep/bota-hero.png', 700, 90)}
-            alt="Bota de seguridad SafeStep"
-            width={580}
-            height={650}
-            className="relative z-10 object-contain drop-shadow-2xl"
-            style={{ maxHeight: '560px', height: 'auto' }}
-          />
+        {/* Boot image — marco técnico */}
+        <div className="order-1 md:order-2 relative flex justify-center">
+          <div className="ss-rise ss-crop relative p-6" style={{ animationDelay: '180ms' }}>
+            <CropCorners />
+            <div
+              className="absolute inset-8 rounded-full opacity-30"
+              style={{ background: `radial-gradient(circle, ${SS.teal}, transparent 70%)` }}
+            />
+            <img
+              src={img('/media/safestep/calzado-hero.png', 760, 90)}
+              alt="Calzado de seguridad SafeStep"
+              width={560}
+              height={560}
+              className="ss-scan relative z-10 object-contain drop-shadow-2xl"
+              style={{ maxHeight: '520px', height: 'auto' }}
+            />
+            <span
+              className="ss-label absolute z-20 top-2 right-2 px-2 py-1 rounded"
+              style={{ backgroundColor: SS.amber, color: SS.ink, fontSize: '.6rem' }}
+            >
+              200 J · S3
+            </span>
+          </div>
         </div>
       </div>
+      <div className="ss-hazard h-2 w-full" />
     </section>
   );
 }
@@ -92,18 +113,23 @@ const TRUST_ITEMS = [
   { icon: '🛡️', title: 'EPP Certificado', desc: 'Normas ISO y NOM-STPS' },
   { icon: '🧤', title: 'Catálogo Completo', desc: 'Guantes, botas, mangueras y más' },
   { icon: '⚙️', title: 'Herramientas Pro', desc: 'Discos de corte y abrasivos' },
-  { icon: '📦', title: 'Envíos Nacionales', desc: 'Entrega rápida a todo el país' },
+  { icon: '📦', title: 'Envíos Nacionales', desc: 'Entrega rápida a todo el país' }
 ];
 
 function TrustStrip() {
   return (
-    <section className="border-y border-gray-100 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 py-10 grid grid-cols-2 md:grid-cols-4 gap-6">
-        {TRUST_ITEMS.map((item) => (
-          <div key={item.title} className="flex items-center gap-4">
-            <span className="text-3xl">{item.icon}</span>
+    <section className="ss-grid-ink" style={{ backgroundColor: SS.paper, borderBottom: `1px solid ${SS.mint}` }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-12 grid grid-cols-2 md:grid-cols-4">
+        {TRUST_ITEMS.map((item, i) => (
+          <div
+            key={item.title}
+            className="flex items-start gap-4 px-2 md:px-6 py-3"
+            style={{ borderLeft: i === 0 ? 'none' : `1px solid ${SS.mint}` }}
+          >
+            <span className="text-3xl leading-none">{item.icon}</span>
             <div>
-              <div className="font-semibold text-gray-900 text-sm">{item.title}</div>
+              <div className="ss-label" style={{ color: SS.teal, fontSize: '.58rem' }}>0{i + 1}</div>
+              <div className="font-bold text-gray-900 text-sm mt-1">{item.title}</div>
               <div className="text-xs text-gray-500 mt-0.5">{item.desc}</div>
             </div>
           </div>
@@ -116,45 +142,53 @@ function TrustStrip() {
 // ─── Full-width Banner with overlay ──────────────────────────────────────────
 
 function IndustrialBanner({
-  src, heading, subText, eyebrow, cta, ctaHref, flip = false
+  src,
+  heading,
+  subText,
+  eyebrow,
+  cta,
+  ctaHref,
+  flip = false
 }: {
-  src: string; heading: string; subText: string;
-  eyebrow: string; cta: string; ctaHref: string; flip?: boolean;
+  src: string;
+  heading: string;
+  subText: string;
+  eyebrow: string;
+  cta: string;
+  ctaHref: string;
+  flip?: boolean;
 }) {
   return (
     <section
-      className="relative overflow-hidden"
+      className="ss-grain relative overflow-hidden"
       style={{
         backgroundImage: `url(${img(src, 1600, 85)})`,
         backgroundSize: 'cover',
         backgroundPosition: flip ? 'center right' : 'center left',
-        minHeight: '480px',
+        minHeight: '480px'
       }}
     >
-      {/* Base dark overlay — covers full image */}
-      <div className="absolute inset-0" style={{ backgroundColor: 'rgba(5,20,20,0.55)' }} />
-      {/* Directional gradient for text contrast */}
+      <div className="absolute inset-0" style={{ backgroundColor: 'rgba(6,24,22,0.6)' }} />
       <div
         className="absolute inset-0"
         style={{
           background: flip
-            ? 'linear-gradient(to left, rgba(0,0,0,0) 0%, rgba(10,30,30,0.60) 55%)'
-            : 'linear-gradient(to right, rgba(10,30,30,0.60) 45%, rgba(0,0,0,0) 100%)',
+            ? 'linear-gradient(to left, rgba(0,0,0,0) 0%, rgba(8,32,30,0.72) 55%)'
+            : 'linear-gradient(to right, rgba(8,32,30,0.72) 45%, rgba(0,0,0,0) 100%)'
         }}
       />
       <div className="relative max-w-7xl mx-auto px-6 md:px-10 py-24 flex items-center" style={{ minHeight: '480px' }}>
         <div className={`max-w-xl ${flip ? 'ml-auto text-right' : ''}`}>
-          <span className="text-xs font-semibold tracking-widest uppercase mb-3 block" style={{ color: '#4dd6cf' }}>
-            {eyebrow}
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight mb-5">
+          <div className={flip ? 'flex justify-end' : ''}>
+            <Eyebrow color={SS.amber}>{eyebrow}</Eyebrow>
+          </div>
+          <h2 className="ss-display text-white leading-tight mt-4 mb-5" style={{ fontSize: 'clamp(2rem,4vw,3.2rem)', fontWeight: 700 }}>
             {heading}
           </h2>
-          <p className="text-gray-300 mb-8 leading-relaxed">{subText}</p>
+          <p className="mb-8 leading-relaxed" style={{ color: 'rgba(233,246,244,.8)' }}>{subText}</p>
           <a
             href={ctaHref}
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg font-semibold text-sm text-white transition-opacity hover:opacity-90"
-            style={{ backgroundColor: '#187772' }}
+            className="ss-btn ss-btn-amber inline-flex items-center gap-2 px-7 py-3.5 rounded-md font-bold text-sm"
           >
             {cta}
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -167,68 +201,96 @@ function IndustrialBanner({
   );
 }
 
-// ─── Feature Split ────────────────────────────────────────────────────────────
+// ─── Categories Grid ─────────────────────────────────────────────────────────
 
-function FeatureSplit() {
+function CategoriesGrid() {
   return (
-    <section className="bg-white">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28 grid md:grid-cols-2 gap-16 items-center">
-        {/* Image */}
-        <div className="relative">
-          <div
-            className="absolute -inset-4 rounded-3xl opacity-5"
-            style={{ backgroundColor: '#187772' }}
-          />
-          <img
-            src={img('/media/safestep/bota-lateral.png', 600, 90)}
-            alt="Bota SafeStep vista lateral"
-            width={560}
-            height={630}
-            className="relative z-10 object-contain mx-auto drop-shadow-xl"
-            style={{ maxHeight: '520px', height: 'auto' }}
-          />
+    <section style={{ backgroundColor: SS.paper }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-20">
+        <div className="flex items-end justify-between flex-wrap gap-4 mb-12">
+          <div>
+            <Eyebrow>Nuestro Catálogo</Eyebrow>
+            <h2 className="ss-display text-gray-900 mt-3" style={{ fontSize: 'clamp(2rem,4vw,3.2rem)', fontWeight: 700 }}>
+              Equipamiento completo para ferreterías e industria
+            </h2>
+          </div>
+          <a href="/catalog" className="ss-label ss-link-underline pb-1" style={{ color: SS.teal }}>
+            Ver todo →
+          </a>
         </div>
-        {/* Copy */}
-        <div>
-          <span
-            className="inline-block text-xs font-semibold tracking-widest uppercase mb-4"
-            style={{ color: '#187772' }}
-          >
-            Calidad en Cada Producto
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
-            Línea Completa de Equipos de Protección Personal
-          </h2>
-          <p className="text-gray-500 mb-5 leading-relaxed">
-            Cumplimos con los más altos estándares de calidad para garantizar
-            la seguridad de tus trabajadores. Desde la cabeza hasta los pies,
-            tenemos el equipo que necesitas.
-          </p>
-          <p className="text-gray-500 mb-8 leading-relaxed">
-            Cada producto pasa por rigurosos controles de calidad y cumple con
-            las normas NOM-STPS e ISO vigentes antes de llegar a tus manos.
-          </p>
-          <ul className="space-y-3 mb-8">
-            {[
-              'Calzado de seguridad con punta de acero certificada 200 J',
-              'Guantes industriales: corte, calor, químicos y mecánicos',
-              'Mangueras de alta presión para aire, agua y fluidos',
-              'Discos de corte, desbaste y abrasivos profesionales',
-            ].map((feat) => (
-              <li key={feat} className="flex items-start gap-3 text-sm text-gray-700">
-                <svg className="w-5 h-5 mt-0.5 shrink-0" style={{ color: '#187772' }} fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                {feat}
-              </li>
-            ))}
-          </ul>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Big card */}
           <a
             href="/catalog"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg text-white font-semibold text-sm transition-opacity hover:opacity-90"
-            style={{ backgroundColor: '#187772' }}
+            className="ss-tile ss-crop md:row-span-2 group relative overflow-hidden rounded-xl"
+            style={{ backgroundColor: SS.teal700, minHeight: '460px' }}
           >
-            Ver Catálogo Completo
+            <CropCorners />
+            <img
+              src={img('/media/safestep/bota-hero.png', 560, 90)}
+              alt="Botas punta de acero"
+              className="ss-tile-img absolute inset-0 w-full h-full object-contain object-bottom opacity-95"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-6">
+              <span className="ss-label" style={{ color: SS.amber, fontSize: '.6rem' }}>Más vendido</span>
+              <h3 className="ss-display text-2xl text-white mt-1" style={{ fontWeight: 700 }}>Botas con Punta de Acero</h3>
+              <span className="ss-link-underline text-sm text-gray-200 mt-1 inline-block">Ver modelos →</span>
+            </div>
+          </a>
+          {/* Suela */}
+          <a
+            href="/catalog"
+            className="ss-tile group relative overflow-hidden rounded-xl"
+            style={{ backgroundColor: SS.ink2, minHeight: '210px' }}
+          >
+            <img
+              src={img('/media/safestep/suela.png', 420, 85)}
+              alt="Suela anti-deslizante"
+              className="ss-tile-img absolute inset-0 w-full h-full object-contain object-center opacity-80"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-5">
+              <h3 className="font-bold text-white">Suela Anti-Deslizante</h3>
+              <span className="ss-label text-gray-300" style={{ fontSize: '.58rem' }}>Certificada · Ver más →</span>
+            </div>
+          </a>
+          {/* Cotización — acento ámbar */}
+          <a
+            href="/contacto"
+            className="ss-tile group relative overflow-hidden rounded-xl"
+            style={{ backgroundColor: SS.amber, minHeight: '210px' }}
+          >
+            <div className="absolute inset-0 flex flex-col justify-center p-6">
+              <span className="ss-label" style={{ color: SS.ink, fontSize: '.58rem' }}>Mayoreo</span>
+              <h3 className="ss-display text-2xl mt-1 mb-2" style={{ color: SS.ink, fontWeight: 700 }}>Cotización Empresarial</h3>
+              <p className="text-sm mb-3" style={{ color: 'rgba(8,32,30,.7)' }}>Precios especiales para pedidos al mayoreo.</p>
+              <span className="ss-link-underline text-sm font-bold inline-block" style={{ color: SS.ink }}>Solicitar ahora →</span>
+            </div>
+          </a>
+          {/* Guantes */}
+          <a
+            href="/catalog"
+            className="ss-tile group relative overflow-hidden rounded-xl"
+            style={{ backgroundColor: SS.ink, minHeight: '210px' }}
+          >
+            <div className="absolute inset-0 flex flex-col justify-center p-6">
+              <h3 className="font-bold text-white mb-1">Guantes Industriales</h3>
+              <p className="text-gray-400 text-xs mb-3">Corte · Calor · Químicos · Mecánicos</p>
+              <span className="ss-label text-gray-400" style={{ fontSize: '.58rem' }}>Ver modelos →</span>
+            </div>
+          </a>
+          {/* Discos */}
+          <a
+            href="/catalog"
+            className="ss-tile group relative overflow-hidden rounded-xl"
+            style={{ backgroundColor: SS.teal, minHeight: '210px' }}
+          >
+            <div className="absolute inset-0 flex flex-col justify-center p-6">
+              <h3 className="font-bold text-white mb-1">Discos y Abrasivos</h3>
+              <p className="text-xs mb-3" style={{ color: 'rgba(233,246,244,.75)' }}>Corte · Desbaste · Pulido · Lijado</p>
+              <span className="ss-label" style={{ color: SS.teal300, fontSize: '.58rem' }}>Ver catálogo →</span>
+            </div>
           </a>
         </div>
       </div>
@@ -236,90 +298,61 @@ function FeatureSplit() {
   );
 }
 
-// ─── Categories Grid ─────────────────────────────────────────────────────────
+// ─── Feature Split ────────────────────────────────────────────────────────────
 
-function CategoriesGrid() {
+function FeatureSplit() {
+  const feats = [
+    'Calzado de seguridad con punta de acero certificada 200 J',
+    'Guantes industriales: corte, calor, químicos y mecánicos',
+    'Mangueras de alta presión para aire, agua y fluidos',
+    'Discos de corte, desbaste y abrasivos profesionales'
+  ];
   return (
-    <section className="bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 py-16">
-        <div className="text-center mb-12">
-          <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#187772' }}>
-            Nuestro Catálogo
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
-            Equipamiento Completo para Ferreterías e Industria
-          </h2>
+    <section style={{ backgroundColor: '#fff' }}>
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-20 md:py-28 grid md:grid-cols-2 gap-16 items-center">
+        {/* Image */}
+        <div className="ss-crop relative p-6" style={{ backgroundColor: SS.mint, borderRadius: '1rem' }}>
+          <CropCorners />
+          <img
+            src={img('/media/safestep/bota-lateral.png', 620, 90)}
+            alt="Bota SafeStep vista lateral"
+            width={560}
+            height={560}
+            className="relative z-10 object-contain mx-auto drop-shadow-xl"
+            style={{ maxHeight: '500px', height: 'auto' }}
+          />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Big card */}
+        {/* Copy */}
+        <div>
+          <Eyebrow>Calidad en Cada Producto</Eyebrow>
+          <h2 className="ss-display text-gray-900 mt-3 mb-6" style={{ fontSize: 'clamp(2rem,3.6vw,3rem)', fontWeight: 700 }}>
+            Línea completa de equipos de protección personal
+          </h2>
+          <p className="text-gray-500 mb-5 leading-relaxed">
+            Cumplimos con los más altos estándares de calidad para garantizar la
+            seguridad de tus trabajadores. Desde la cabeza hasta los pies,
+            tenemos el equipo que necesitas.
+          </p>
+          <ul className="space-y-3 mb-8">
+            {feats.map((feat) => (
+              <li key={feat} className="flex items-start gap-3 text-sm text-gray-700">
+                <span
+                  className="shrink-0 mt-0.5 w-5 h-5 rounded flex items-center justify-center"
+                  style={{ backgroundColor: SS.amber }}
+                >
+                  <svg className="w-3.5 h-3.5" style={{ color: SS.ink }} fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                </span>
+                {feat}
+              </li>
+            ))}
+          </ul>
           <a
             href="/catalog"
-            className="md:row-span-2 group relative overflow-hidden rounded-2xl"
-            style={{ backgroundColor: '#187772', minHeight: '440px' }}
+            className="ss-btn ss-btn-primary inline-flex items-center gap-2 px-7 py-3.5 rounded-md font-semibold text-sm"
           >
-            <img
-              src={img('/media/safestep/bota-hero.png', 500, 90)}
-              alt="Botas punta de acero"
-              className="absolute inset-0 w-full h-full object-contain object-bottom transition-transform duration-500 group-hover:scale-105 opacity-90"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-6">
-              <span className="text-xs text-teal-300 font-semibold tracking-widest uppercase">Más vendido</span>
-              <h3 className="text-xl font-bold text-white mt-1">Botas con Punta de Acero</h3>
-              <span className="text-sm text-gray-300 mt-1 block">Ver modelos →</span>
-            </div>
-          </a>
-          {/* Small cards */}
-          <a
-            href="/catalog"
-            className="group relative overflow-hidden rounded-2xl"
-            style={{ backgroundColor: '#374151', minHeight: '200px' }}
-          >
-            <img
-              src={img('/media/safestep/suela.png', 400, 85)}
-              alt="Suela anti-deslizante"
-              className="absolute inset-0 w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-105 opacity-80"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-5">
-              <h3 className="text-base font-bold text-white">Suela Anti-Deslizante</h3>
-              <span className="text-xs text-gray-300">Certificada · Ver más →</span>
-            </div>
-          </a>
-          <a
-            href="/"
-            className="group relative overflow-hidden rounded-2xl bg-red-600"
-            style={{ minHeight: '200px' }}
-          >
-            <div className="absolute inset-0 flex flex-col justify-center p-6">
-              <h3 className="text-lg font-bold text-white mb-2">Cotización Empresarial</h3>
-              <p className="text-red-100 text-sm mb-4">Precios especiales para pedidos al mayoreo.</p>
-              <span className="text-sm font-semibold text-white inline-flex items-center gap-1">
-                Solicitar ahora →
-              </span>
-            </div>
-          </a>
-          <a
-            href="/catalog"
-            className="group relative overflow-hidden rounded-2xl"
-            style={{ backgroundColor: '#1f2937', minHeight: '200px' }}
-          >
-            <div className="absolute inset-0 flex flex-col justify-center p-6">
-              <h3 className="text-base font-bold text-white mb-1">Guantes Industriales</h3>
-              <p className="text-gray-400 text-xs mb-3">Corte · Calor · Químicos · Mecánicos</p>
-              <span className="text-xs text-gray-400">Ver modelos →</span>
-            </div>
-          </a>
-          <a
-            href="/catalog"
-            className="group relative overflow-hidden rounded-2xl"
-            style={{ backgroundColor: '#0f766e', minHeight: '200px' }}
-          >
-            <div className="absolute inset-0 flex flex-col justify-center p-6">
-              <h3 className="text-base font-bold text-white mb-1">Discos y Abrasivos</h3>
-              <p className="text-teal-100 text-xs mb-3">Corte · Desbaste · Pulido · Lijado</p>
-              <span className="text-xs text-teal-200">Ver catálogo →</span>
-            </div>
+            Ver Catálogo Completo
           </a>
         </div>
       </div>
@@ -334,44 +367,54 @@ const FAQ_ITEMS = [
   { q: '¿Qué normas de seguridad certifican sus productos?', a: 'Nuestros productos cumplen con las Normas Oficiales Mexicanas NOM-STPS y estándares internacionales como ISO 20345:2011 para calzado, EN 388 para guantes de protección mecánica, y las normas aplicables a cada categoría de producto.' },
   { q: '¿Ofrecen precios especiales para compras por volumen?', a: 'Sí, contamos con precios especiales para ferreterías, empresas y distribuidores. Contáctanos para recibir una cotización personalizada según tu volumen y frecuencia de compra.' },
   { q: '¿Cuáles son los métodos de pago?', a: 'Aceptamos tarjetas de crédito y débito (Visa, Mastercard, American Express), transferencia bancaria y PayPal.' },
-  { q: '¿Realizan envíos a todo el país?', a: 'Sí, enviamos a toda la república y a varios países de América Latina. Los pedidos mayores a $75 USD tienen envío gratuito. El tiempo de entrega es de 3 a 5 días hábiles.' },
+  { q: '¿Realizan envíos a todo el país?', a: 'Sí, enviamos a toda la república y a varios países de América Latina. Los pedidos mayores a $75 USD tienen envío gratuito. El tiempo de entrega es de 3 a 5 días hábiles.' }
 ];
 
 function FaqSection() {
-  const [open, setOpen] = useState<number | null>(null);
+  const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="bg-white">
+    <section style={{ backgroundColor: SS.paper }}>
       <div className="max-w-3xl mx-auto px-6 md:px-10 py-20">
         <div className="text-center mb-12">
-          <span className="text-xs font-semibold tracking-widest uppercase" style={{ color: '#187772' }}>
-            Soporte
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
+          <div className="flex justify-center">
+            <Eyebrow>Soporte</Eyebrow>
+          </div>
+          <h2 className="ss-display text-gray-900 mt-3" style={{ fontSize: 'clamp(2rem,4vw,3rem)', fontWeight: 700 }}>
             Preguntas Frecuentes
           </h2>
         </div>
-        <div className="divide-y divide-gray-100">
-          {FAQ_ITEMS.map((item, idx) => (
-            <div key={idx}>
-              <button
-                type="button"
-                onClick={() => setOpen(open === idx ? null : idx)}
-                className="w-full flex items-center justify-between py-5 text-left gap-6"
+        <div>
+          {FAQ_ITEMS.map((item, idx) => {
+            const isOpen = open === idx;
+            return (
+              <div
+                key={idx}
+                className="ss-card mb-3 rounded-lg overflow-hidden"
+                style={{ border: `1px solid ${isOpen ? SS.teal : SS.mint}`, backgroundColor: '#fff' }}
               >
-                <span className="font-medium text-gray-900 text-sm md:text-base">{item.q}</span>
-                <svg
-                  className={`w-5 h-5 shrink-0 transition-transform ${open === idx ? 'rotate-180' : ''}`}
-                  style={{ color: '#187772' }}
-                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? null : idx)}
+                  className="w-full flex items-center gap-4 py-5 px-5 text-left"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              {open === idx && (
-                <p className="pb-5 text-sm text-gray-500 leading-relaxed">{item.a}</p>
-              )}
-            </div>
-          ))}
+                  <span className="ss-label" style={{ color: isOpen ? SS.teal : '#9ca3af', fontSize: '.7rem' }}>
+                    0{idx + 1}
+                  </span>
+                  <span className="font-semibold text-gray-900 text-sm md:text-base flex-1">{item.q}</span>
+                  <svg
+                    className={`w-5 h-5 shrink-0 transition-transform ${isOpen ? 'rotate-45' : ''}`}
+                    style={{ color: isOpen ? SS.teal : '#9ca3af' }}
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                </button>
+                {isOpen && (
+                  <p className="px-5 pb-5 pl-14 text-sm text-gray-500 leading-relaxed">{item.a}</p>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -382,13 +425,14 @@ function FaqSection() {
 
 export default function SafeStepHome() {
   return (
-    <div className="safestep-home">
+    <div className="ss safestep-home">
+      <SafeStepDesign />
       <Hero />
       <TrustStrip />
       <IndustrialBanner
         src="/media/safestep/fondo-ferreteria-1.webp"
         eyebrow="Catálogo Completo"
-        heading="Todo lo que tu Ferretería Necesita en un Solo Lugar"
+        heading="Todo lo que tu ferretería necesita en un solo lugar"
         subText="Desde botas con punta de acero y guantes industriales, hasta mangueras de alta presión, discos de corte y abrasivos. El proveedor que tu negocio necesita."
         cta="Ver Catálogo"
         ctaHref="/catalog"
@@ -398,10 +442,10 @@ export default function SafeStepHome() {
       <IndustrialBanner
         src="/media/safestep/fondo-ferreteria-2.webp"
         eyebrow="Cotización Empresarial"
-        heading="Precios Especiales para Empresas y Distribuidores"
+        heading="Precios especiales para empresas y distribuidores"
         subText="Pedidos al mayoreo, entregas personalizadas y soporte técnico especializado. Contáctanos hoy y recibe tu cotización en 24 horas."
         cta="Solicitar Cotización"
-        ctaHref="/"
+        ctaHref="/contacto"
         flip
       />
       <FaqSection />
@@ -411,5 +455,5 @@ export default function SafeStepHome() {
 
 export const layout = {
   areaId: 'content',
-  sortOrder: 1,
+  sortOrder: 1
 };
