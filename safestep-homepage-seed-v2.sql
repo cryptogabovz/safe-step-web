@@ -95,6 +95,13 @@ INSERT INTO widget_placement (widget_instance_id, route, area, sort_order) VALUE
 
 END $$;
 
+-- ============================================================
+-- Admin language: Spanish
+-- ============================================================
+INSERT INTO setting (name, value, is_json)
+VALUES ('adminLanguage', 'es', 0)
+ON CONFLICT (name) DO UPDATE SET value = 'es';
+
 COMMIT;
 
 SELECT wi.name, wi.type, wp.route, wp.area, wp.sort_order
