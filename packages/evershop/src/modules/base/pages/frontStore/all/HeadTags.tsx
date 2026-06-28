@@ -1,3 +1,4 @@
+import { Title } from '@components/common/Title.js';
 import { Og } from '@components/frontStore/Og.js';
 import React, {
   LinkHTMLAttributes,
@@ -68,7 +69,7 @@ export default function HeadTags({
 
   return (
     <>
-      <title>{title}</title>
+      <Title title={title} />
       <meta name="description" content={description} />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       {metas.map((meta, index) => (

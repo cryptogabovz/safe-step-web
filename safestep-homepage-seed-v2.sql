@@ -102,6 +102,13 @@ INSERT INTO setting (name, value, is_json)
 VALUES ('adminLanguage', 'es', 0)
 ON CONFLICT (name) DO UPDATE SET value = 'es';
 
+-- ============================================================
+-- Store name / marca (título de página, fallback de <title>)
+-- ============================================================
+INSERT INTO setting (name, value, is_json)
+VALUES ('storeName', 'Safe Step', 0)
+ON CONFLICT (name) DO UPDATE SET value = 'Safe Step';
+
 COMMIT;
 
 SELECT wi.name, wi.type, wp.route, wp.area, wp.sort_order

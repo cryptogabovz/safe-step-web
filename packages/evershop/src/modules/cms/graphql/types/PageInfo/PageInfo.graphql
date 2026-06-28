@@ -39,6 +39,7 @@ type PageInfo {
   keywords: [String!]
   ogInfo: OgInfo
   breadcrumbs: [Breadcrumb!]
+  routeId: String
   favicon: String
   canonicalUrl: String
   alternates: [Alternate!]

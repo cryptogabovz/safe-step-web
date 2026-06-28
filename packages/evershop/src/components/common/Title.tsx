@@ -177,6 +177,17 @@ const formatTitle = (
  *   suffix="EverShop"
  * />
  */
+// Marca SafeStep: se añade como sufijo en TODA página (admin + storefront),
+// salvo que el título ya contenga la marca, para no duplicarla
+// (p. ej. "Nosotros — SafeStep Corp", o el home cuyo título es "Safe Step").
+const BRAND_NAME = 'Safe Step';
+const withBrand = (value: string): string => {
+  if (!value || value.trim().length === 0) {
+    return BRAND_NAME;
+  }
+  return /safe\s*step/i.test(value) ? value : `${value} — ${BRAND_NAME}`;
+};
+
 export function Title({
   title,
   prefix,
@@ -194,10 +205,13 @@ export function Title({
     maxLength
   );
 
-  // Validate in development
-  validateTitle(formattedTitle, maxLength);
+  // Marca de la tienda siempre presente en el <title>
+  const brandedTitle = withBrand(formattedTitle);
 
-  return <title {...otherProps}>{formattedTitle}</title>;
+  // Validate in development
+  validateTitle(brandedTitle, maxLength);
+
+  return <title {...otherProps}>{brandedTitle}</title>;
 }
 
 /**

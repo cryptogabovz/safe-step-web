@@ -47,6 +47,9 @@ export default {
     })
   },
   PageInfo: {
+    // ID de la ruta actual (p. ej. 'productView', 'nosotros', 'contacto').
+    // Permite a los componentes de área ocultarse en rutas concretas.
+    routeId: (root, args, context) => get(context, 'currentRoute.id', null),
     // hreflang alternates (spec §6.17): one absolute URL per enabled locale (prefix swap,
     // shared slugs) + x-default. [] for single-locale / admin (available is [locale] there).
     alternates: (root, args, context) => {

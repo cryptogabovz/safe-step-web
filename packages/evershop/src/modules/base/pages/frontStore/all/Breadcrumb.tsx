@@ -10,6 +10,7 @@ import React from 'react';
 
 interface BreadcrumbProps {
   pageInfo: {
+    routeId?: string | null;
     breadcrumbs: Array<{
       title: string;
       url: string;
@@ -17,7 +18,14 @@ interface BreadcrumbProps {
   };
 }
 
-function Breadcrumb({ pageInfo: { breadcrumbs } }: BreadcrumbProps) {
+// Rutas con su propio encabezado/breadcrumb a medida → ocultamos el breadcrumb
+// global por defecto (y su espacio) para que la sección pegue con el header.
+const HIDDEN_BREADCRUMB_ROUTES = ['productView', 'nosotros', 'contacto'];
+
+function Breadcrumb({ pageInfo: { routeId, breadcrumbs } }: BreadcrumbProps) {
+  if (routeId && HIDDEN_BREADCRUMB_ROUTES.includes(routeId)) {
+    return null;
+  }
   return breadcrumbs.length ? (
     <div className="page-width">
       <div className="py-5">
@@ -47,6 +55,7 @@ function Breadcrumb({ pageInfo: { breadcrumbs } }: BreadcrumbProps) {
 export const query = `
   query query {
     pageInfo {
+      routeId
       breadcrumbs {
         title
         url
