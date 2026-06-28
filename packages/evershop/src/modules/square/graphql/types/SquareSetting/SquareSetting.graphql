@@ -1,0 +1,8 @@
+extend type Setting {
+  squarePaymentStatus: Int
+  squareDisplayName: String
+  squareApplicationId: String
+  squareLocationId: String
+  squareEnvironment: String
+  squarePaymentMode: String
+}

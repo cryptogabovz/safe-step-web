@@ -3,8 +3,8 @@ import {
   CategoryTreeItem
 } from '@components/admin/CategoryTree.js';
 import Area from '@components/common/Area.js';
-import { Editor } from '@components/common/form/Editor.js';
 import { InputField } from '@components/common/form/InputField.js';
+import { TextareaField } from '@components/common/form/TextareaField.js';
 import {
   Card,
   CardContent,
@@ -112,15 +112,7 @@ const ParentCategory: React.FC<{
 interface GeneralProps {
   category: {
     name: string;
-    description: Array<{
-      id: string;
-      size: number;
-      columns: Array<{
-        id: string;
-        size: number;
-        data: Record<string, any>;
-      }>;
-    }>;
+    shortDescription?: string;
     categoryId: number;
     parent: {
       categoryId: number;
@@ -164,10 +156,13 @@ export default function General({ category }: GeneralProps) {
     {
       component: {
         default: (
-          <Editor
-            name="description"
+          <TextareaField
+            name="short_description"
             label={_('Description')}
-            value={category?.description || []}
+            defaultValue={category?.shortDescription || ''}
+            rows={6}
+            placeholder={_('Short description shown on the category page…')}
+            helperText={_('Plain text shown on the category page on the storefront.')}
           />
         )
       },
@@ -201,7 +196,7 @@ export const query = `
       categoryId
       name
       hasChildren
-      description
+      shortDescription
       status
       parent {
         categoryId

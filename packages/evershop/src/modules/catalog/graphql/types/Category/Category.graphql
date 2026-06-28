@@ -9,6 +9,7 @@ type Category {
   includeInNav: Int!
   showProducts: Int!
   description: JSON
+  shortDescription: String
   urlKey: String
   metaTitle: String
   metaDescription: String

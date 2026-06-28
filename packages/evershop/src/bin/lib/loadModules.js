@@ -72,6 +72,11 @@ const coreModules = [
     path: path.resolve(__dirname, '../../modules/stripe')
   },
   {
+    name: 'square',
+    resolve: path.resolve(__dirname, '../../modules/square'),
+    path: path.resolve(__dirname, '../../modules/square')
+  },
+  {
     name: 'tax',
     resolve: path.resolve(__dirname, '../../modules/tax'),
     path: path.resolve(__dirname, '../../modules/tax')

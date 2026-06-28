@@ -20,7 +20,12 @@ interface BreadcrumbProps {
 
 // Rutas con su propio encabezado/breadcrumb a medida → ocultamos el breadcrumb
 // global por defecto (y su espacio) para que la sección pegue con el header.
-const HIDDEN_BREADCRUMB_ROUTES = ['productView', 'nosotros', 'contacto'];
+const HIDDEN_BREADCRUMB_ROUTES = [
+  'productView',
+  'catalogView',
+  'nosotros',
+  'contacto'
+];
 
 function Breadcrumb({ pageInfo: { routeId, breadcrumbs } }: BreadcrumbProps) {
   if (routeId && HIDDEN_BREADCRUMB_ROUTES.includes(routeId)) {

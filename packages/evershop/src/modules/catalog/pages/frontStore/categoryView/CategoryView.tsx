@@ -24,9 +24,12 @@ export default function CategoryView({ category }: CategoryViewProps) {
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
             {category.name}
           </h1>
-          {category.description && (
-            <p className="text-gray-500 max-w-2xl text-sm leading-relaxed">
-              {category.description}
+          {category.shortDescription && (
+            <p
+              className="text-gray-500 max-w-2xl text-sm leading-relaxed"
+              style={{ whiteSpace: 'pre-line' }}
+            >
+              {category.shortDescription}
             </p>
           )}
           <p className="text-xs text-gray-400 mt-3">
@@ -119,7 +122,7 @@ export const query = `
       showProducts
       name
       uuid
-      description
+      shortDescription
       image { alt url }
       products {
         items {

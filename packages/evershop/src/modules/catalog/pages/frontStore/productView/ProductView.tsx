@@ -11,22 +11,11 @@ import React from 'react';
 import SafeStepDesign, {
   SS,
   Eyebrow,
-  CropCorners
+  CropCorners,
+  STORE_TRUST
 } from '../../../../cms/pages/frontStore/safestepShared/SafeStepDesign.js';
 
-const TRUST_BADGES = [
-  { icon: '🛡️', label: 'Punta de Acero', sub: 'Certificada 200 J' },
-  { icon: '💧', label: 'Resistente al Agua', sub: 'Membrana hidrofugante' },
-  { icon: '🔩', label: 'Anti-Deslizante', sub: 'ISO 20345:2011' },
-  { icon: '↩️', label: 'Garantía 6 meses', sub: 'Defectos de fabricación' }
-];
-
-const CERTS = [
-  { label: 'NOM-113-STPS', desc: 'Norma Oficial Mexicana' },
-  { label: 'ISO 20345:2011', desc: 'Estándar internacional' },
-  { label: 'Punta Acero', desc: 'Impacto hasta 200 J' },
-  { label: 'Garantía 6m', desc: 'Defectos de fábrica' }
-];
+const PAYMENT_METHODS = ['VISA', 'MASTERCARD', 'AMERICAN EXPRESS', 'PAYPAL'];
 
 export default function ProductView({ product }: ProductData) {
   const simpleDescription =
@@ -143,14 +132,19 @@ export default function ProductView({ product }: ProductData) {
                 ]}
               />
 
-              {/* Trust badges */}
-              <div className="mt-8 pt-6 grid grid-cols-2 gap-3" style={{ borderTop: `1px solid ${SS.mint}` }}>
-                {TRUST_BADGES.map((b) => (
-                  <div key={b.label} className="flex items-start gap-2.5">
-                    <span className="text-xl mt-0.5">{b.icon}</span>
+              {/* Trust badges — confianza de tienda */}
+              <div className="mt-8 pt-6 grid grid-cols-2 gap-4" style={{ borderTop: `1px solid ${SS.mint}` }}>
+                {STORE_TRUST.map((b) => (
+                  <div key={b.title} className="flex items-start gap-2.5">
+                    <div
+                      className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+                      style={{ backgroundColor: SS.mint, color: SS.teal }}
+                    >
+                      {b.icon}
+                    </div>
                     <div>
-                      <p className="text-xs font-bold text-gray-800">{b.label}</p>
-                      <p className="text-xs text-gray-400">{b.sub}</p>
+                      <p className="text-xs font-bold text-gray-800">{b.title}</p>
+                      <p className="text-xs text-gray-400">{b.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -198,25 +192,35 @@ export default function ProductView({ product }: ProductData) {
             )}
           </div>
 
-          {/* Certificaciones */}
+          {/* Compra segura — confianza de tienda */}
           <div className="ss-grain relative overflow-hidden mt-16 rounded-2xl p-8 md:p-12" style={{ backgroundColor: SS.ink }}>
             <div className="ss-grid absolute inset-0" />
             <div className="ss-crop relative">
               <CropCorners />
               <div className="text-center pt-2">
                 <div className="flex justify-center">
-                  <Eyebrow color={SS.amber}>Certificaciones</Eyebrow>
+                  <Eyebrow color={SS.amber}>Compra con confianza</Eyebrow>
                 </div>
-                <h3 className="ss-display text-white mt-3 mb-10" style={{ fontSize: 'clamp(1.6rem,3vw,2.4rem)', fontWeight: 700 }}>
-                  Calzado que cumple los estándares más exigentes
+                <h3 className="ss-display text-white mt-3 mb-3" style={{ fontSize: 'clamp(1.6rem,3vw,2.4rem)', fontWeight: 700 }}>
+                  Tu compra está protegida de principio a fin
                 </h3>
+                <p className="max-w-xl mx-auto mb-8" style={{ color: 'rgba(233,246,244,.7)' }}>
+                  Sitio cifrado con certificado SSL, pagos protegidos y tus datos
+                  siempre seguros.
+                </p>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-px overflow-hidden rounded-lg" style={{ backgroundColor: 'rgba(233,246,244,.12)' }}>
-                {CERTS.map((c) => (
-                  <div key={c.label} className="text-center px-4 py-6" style={{ backgroundColor: SS.ink }}>
-                    <div className="ss-display text-white" style={{ fontSize: '1.4rem', fontWeight: 700 }}>{c.label}</div>
-                    <div className="ss-label mt-2" style={{ color: SS.teal300, fontSize: '.58rem' }}>{c.desc}</div>
+                {STORE_TRUST.map((b) => (
+                  <div key={b.title} className="flex flex-col items-center text-center px-4 py-6 gap-2" style={{ backgroundColor: SS.ink }}>
+                    <span style={{ color: SS.teal300 }}>{b.icon}</span>
+                    <div className="text-sm font-bold text-white">{b.title}</div>
+                    <div className="ss-label" style={{ color: 'rgba(233,246,244,.55)', fontSize: '.56rem' }}>{b.desc}</div>
                   </div>
+                ))}
+              </div>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+                {PAYMENT_METHODS.map((m) => (
+                  <span key={m} className="ss-label" style={{ color: 'rgba(233,246,244,.5)', fontSize: '.6rem' }}>{m}</span>
                 ))}
               </div>
             </div>
